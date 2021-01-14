@@ -38,7 +38,7 @@
         android:textStyle="bold" />
 
     <CheckBox
-        android:id="@+id/coloseum"
+        android:id="@+id/colosseum"
         android:layout_width="250dp"
         android:layout_height="82dp"
         android:layout_below="@+id/sights"
@@ -59,7 +59,7 @@
         android:id="@+id/piazza"
         android:layout_width="250dp"
         android:layout_height="82dp"
-        android:layout_below="@+id/coloseum"
+        android:layout_below="@+id/colosseum"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"

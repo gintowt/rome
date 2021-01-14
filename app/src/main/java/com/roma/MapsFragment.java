@@ -38,7 +38,7 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            String address = "Coloseum";
+            String address = "Colosseum";
             LatLng colosseum = getLocationFromAddress(address);
             LatLng sydney = new LatLng(-34, 151);
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));

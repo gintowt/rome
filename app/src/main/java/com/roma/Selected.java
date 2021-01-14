@@ -11,6 +11,7 @@ public class Selected {
 
     public Selected(){}
 
+
     public String getAttraction1() {
         return Attraction1;
     }
