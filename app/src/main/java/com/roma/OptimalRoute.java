@@ -24,7 +24,7 @@ import java.util.Locale;
 public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallback {
 
     SelectAttraction selected;
-    private static final int ZOOM_LEVEL = 20;
+    private static final int ZOOM_LEVEL = 15;
     private static final int TILT_LEVEL = 0;
     private static final int BEARING_LEVEL = 0;
     @Override
