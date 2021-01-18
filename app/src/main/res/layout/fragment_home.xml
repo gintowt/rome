@@ -13,7 +13,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@drawable/bg_green"/>
+        android:background="@color/primaryColor"/>
 
     <TextView
         android:layout_width="98dp"
@@ -39,7 +39,7 @@
         android:layout_marginLeft="80dp"
         android:layout_marginTop="135dp"
         android:src="@drawable/create"
-        app:backgroundTint="#940001" />
+        app:backgroundTint="@color/primaryLightColor" />
 
 
     <ImageButton
@@ -57,7 +57,7 @@
         android:layout_toEndOf="@+id/itinerary"
         android:layout_toRightOf="@+id/itinerary"
         android:src="@drawable/save"
-        app:backgroundTint="#940001" />
+        app:backgroundTint="@color/primaryLightColor" />
 
     <TextView
         android:id="@+id/recommended_itinerary"
