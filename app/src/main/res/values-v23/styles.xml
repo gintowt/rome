@@ -11,5 +11,7 @@
         <item name="android:statusBarColor">@color/primaryDarkColor</item>
     </style>
 
+    <style name="TextAppearance.WeekDay" parent="android:TextAppearance.DeviceDefault.Small"> 20sp #000000 true </style>
+
 
 </resources>
