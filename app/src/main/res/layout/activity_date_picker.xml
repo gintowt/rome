@@ -79,15 +79,14 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="22dp"
         android:layout_marginRight="22dp"
+        android:weekDayTextAppearance="@color/black"
+        android:dateTextAppearance="@style/TextAppearance.WeekDay"
         android:background="@drawable/bg_green"
-        android:dateTextAppearance="@style/TextAppearance.AppCompat.Medium"
         android:focusedMonthDateColor="#FFFF5B51"
         android:fontFamily="@font/montserrat"
         android:selectedWeekBackgroundColor="@color/primaryLightColor"
-        android:textStyle="bold"
-        android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
-
+        android:textStyle="bold"
         />
 
     <Button

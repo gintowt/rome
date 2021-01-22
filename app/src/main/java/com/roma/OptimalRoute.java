@@ -26,12 +26,12 @@ import java.util.Locale;
 
 public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallback {
 
-    SelectAttraction selected;
     private static final int ZOOM_LEVEL = 15;
     private static final int TILT_LEVEL = 0;
     private static final int BEARING_LEVEL = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_optimal_route);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -43,10 +43,6 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-        //selected = new SelectAttraction();
-        //ArrayList<String> total = selected.getList();
-        //int number = total.size();
 
         Intent select_Attraction = getIntent();
         ArrayList<String> total = select_Attraction.getStringArrayListExtra("test");
@@ -62,17 +58,11 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
             test.add(address);
             googleMap.addMarker(new MarkerOptions().position(address).title("Marker in " + name));
             //googleMap.moveCamera(CameraUpdateFactory.newLatLng(address));
+
             if (i == 0) {
                 CameraPosition camPos = new CameraPosition(address, ZOOM_LEVEL, TILT_LEVEL, BEARING_LEVEL);
                 googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camPos));
             }
-
-
-           /* String name = total.get(i);
-            System.out.println(name);
-            LatLng address = getLocationFromAddress(name);
-            googleMap.addMarker(new MarkerOptions().position(address).title("Marker in " + name));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(address));*/
 
         }
 
@@ -85,23 +75,6 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
                         .color(Color.RED));
             }
         }
-     /*   int i = 0;
-        do{
-            String name = total.get(i);
-            System.out.println(name);
-            LatLng address = getLocationFromAddress(name);
-            googleMap.addMarker(new MarkerOptions().position(address).title("Marker in " + name));
-            //googleMap.moveCamera(CameraUpdateFactory.newLatLng(address));
-            if (i == 0) {
-                CameraPosition camPos = new CameraPosition(address, ZOOM_LEVEL, TILT_LEVEL, BEARING_LEVEL);
-                googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camPos));
-            }
-            i++;
-        }while(i < number);
-    */
-       // LatLng sydney = new LatLng(-34, 151);
-        //googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
 
