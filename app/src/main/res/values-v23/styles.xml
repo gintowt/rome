@@ -11,7 +11,21 @@
         <item name="android:statusBarColor">@color/primaryDarkColor</item>
     </style>
 
-    <style name="TextAppearance.WeekDay" parent="android:TextAppearance.DeviceDefault.Small"> 20sp #000000 true </style>
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/secondaryLightColor</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Medium">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Medium">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
 
 
 </resources>
