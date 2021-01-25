@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,8 +65,9 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class MapActivity extends FragmentActivity implements TaskLoadedCallback {
+ public class MapActivity extends FragmentActivity implements TaskLoadedCallback {
 
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
@@ -73,41 +75,67 @@ public class MapActivity extends FragmentActivity implements TaskLoadedCallback 
     private MarkerOptions place1, place2;
     private Polyline currentPolyline;
     private GoogleMap mMap;
-    private static final int ZOOM_LEVEL = 10;
+    private static final int ZOOM_LEVEL = 15;
     private static final int TILT_LEVEL = 0;
     private static final int BEARING_LEVEL = 0;
+    EditText search_destination;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         search = (ImageButton) findViewById(R.id.ic_magnify);
-
-        //27.658143,85.3199503
-        //27.667491,85.3208583
-        place1 = new MarkerOptions().position(new LatLng(50.30582, 18.9742)).title("My location");
-        place2 = new MarkerOptions().position(new LatLng(50.270908, 19.039993)).title("Location 2");
+        search_destination = (EditText) findViewById(R.id.input_search);
 
         SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
+        place1 = new MarkerOptions().position(new LatLng(41.8992813, 12.489064)).title("My location");
+        //place2 = new MarkerOptions().position(new LatLng(50.0624368, 18.9345288)).title("Kobiór");
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mMap = googleMap;
-                Log.d("mylog", "Added Markers");
+                Log.d("mylog", String.valueOf(place1));
+                place1 = new MarkerOptions().position(new LatLng(41.8992813, 12.489064)).title("My location");
                 mMap.addMarker(place1);
-                mMap.addMarker(place2);
+                //mMap.addMarker(place2);
                 CameraPosition camPos = new CameraPosition(place1.getPosition(), ZOOM_LEVEL, TILT_LEVEL, BEARING_LEVEL);
                 googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(camPos));
             }
         });
-        search.setOnClickListener(new View.OnClickListener() {
+/*
+        search.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 new FetchURL(MapActivity.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "driving"), "driving");
             }
         });
+     */
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String add = search_destination.getText().toString().trim();
+                Log.i("check", String.valueOf(add));
+                if (! add.isEmpty()) {
+                    if (place2 != null){
+                        mMap.clear();
+                        mMap.addMarker(place1);
+                    }
+                        place2 = new MarkerOptions().position(getLocationFromAddress(add)).title(add);
+                        Log.i("test", String.valueOf(getLocationFromAddress(add)));
+                        mMap.addMarker(place2);
+                        new FetchURL(MapActivity.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "walking"), "driving");
+
+
+                } else {
+                    Toast.makeText(MapActivity.this, "Please fill the box", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
     }
 
    /* @Override
@@ -118,6 +146,31 @@ public class MapActivity extends FragmentActivity implements TaskLoadedCallback 
         mMap.addMarker(place2);
     }
     */
+
+     public LatLng getLocationFromAddress(String strAddress) {
+
+         Geocoder coder = new Geocoder(this, Locale.getDefault());
+         List<Address> address;
+         LatLng p1 = null;
+
+         try {
+             address = coder.getFromLocationName(strAddress, 5);
+             if (address == null) {
+                 return null;
+             }
+             Address location = address.get(0);
+             location.getLatitude();
+             location.getLongitude();
+
+             p1 = new LatLng(location.getLatitude(), location.getLongitude());
+
+             return p1;
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+         return p1;
+     }
+
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
