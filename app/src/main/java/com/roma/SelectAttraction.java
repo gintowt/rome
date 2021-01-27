@@ -128,8 +128,8 @@ public class SelectAttraction extends AppCompatActivity {
                 }
 
                 setList(checkedAttractions);
-                Intent optimal = new Intent(SelectAttraction.this, OptimalRoute.class);
-                optimal.putStringArrayListExtra("test",checkedAttractions );
+                Intent optimal = new Intent(SelectAttraction.this, TestRoute.class);
+                //optimal.putStringArrayListExtra("test",checkedAttractions );
                 startActivity(optimal);
             }
         });
