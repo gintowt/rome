@@ -17,5 +17,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context="com.example.polygons.PolyActivity"/>
 
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="650dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/white_border"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/primaryLightColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/optimal" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
