@@ -24,8 +24,8 @@ public class SelectAttraction extends AppCompatActivity {
     ImageButton back;
     Button next;
     CheckBox colosseum, pantheon, fontanna, forum, basilica, piazza;
-    FirebaseDatabase database;
-    DatabaseReference reference;
+    //FirebaseDatabase database;
+    //DatabaseReference reference;
     Selected selected;
     int i = 0;
     ArrayList<String> checkedAttractions = new ArrayList<String>();
@@ -35,7 +35,7 @@ public class SelectAttraction extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_attraction);
 
-        reference = database.getInstance().getReference().child("Selected");
+        //reference = database.getInstance().getReference().child("Selected");
 
         selected = new Selected();
         back = findViewById(R.id.back_arrow);
@@ -53,6 +53,7 @@ public class SelectAttraction extends AppCompatActivity {
         String a5 = "St Peter's Basilica";
         String a6 = "Pantheon";
 
+        /*
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,7 +68,7 @@ public class SelectAttraction extends AppCompatActivity {
 
             }
         });
-
+        */
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +83,7 @@ public class SelectAttraction extends AppCompatActivity {
                 if (colosseum.isChecked()) {
                     String text = colosseum.getText().toString();
                     selected.setAttraction1(text);
-                    reference.child(String.valueOf(i+1)).setValue(selected);
+                    //reference.child(String.valueOf(i+1)).setValue(selected);
                     Log.i("Attraction1: ", selected.getAttraction1());
                     checkedAttractions.add(text);
                 } else { }
@@ -90,35 +91,35 @@ public class SelectAttraction extends AppCompatActivity {
                 if (piazza.isChecked()) {
                     String text = piazza.getText().toString();
                     selected.setAttraction2(a2);
-                    reference.child(String.valueOf(i+1)).setValue(selected);
+                    //reference.child(String.valueOf(i+1)).setValue(selected);
                     checkedAttractions.add(text);
                 } else { }
 
                 if (forum.isChecked()) {
                     String text = forum.getText().toString();
                     selected.setAttraction3(a3);
-                    reference.child(String.valueOf(i+1)).setValue(selected);
+                   // reference.child(String.valueOf(i+1)).setValue(selected);
                     checkedAttractions.add(text);
                 } else { }
 
                 if (fontanna.isChecked()) {
                     String text = fontanna.getText().toString();
                     selected.setAttraction4(a4);
-                    reference.child(String.valueOf(i+1)).setValue(selected);
+                   // reference.child(String.valueOf(i+1)).setValue(selected);
                     checkedAttractions.add(text);
                 } else { }
 
                 if (basilica.isChecked()) {
                     String text = basilica.getText().toString();
                     selected.setAttraction5(a5);
-                    reference.child(String.valueOf(i+1)).setValue(selected);
+                    //reference.child(String.valueOf(i+1)).setValue(selected);
                     checkedAttractions.add(text);
                 } else { }
 
                 if (pantheon.isChecked()) {
                     String text = pantheon.getText().toString();
                     selected.setAttraction6(a6);
-                    reference.child(String.valueOf(i+1)).setValue(selected);
+                    //reference.child(String.valueOf(i+1)).setValue(selected);
                     checkedAttractions.add(text);
                 } else { }
 
@@ -128,8 +129,8 @@ public class SelectAttraction extends AppCompatActivity {
                 }
 
                 setList(checkedAttractions);
-                Intent optimal = new Intent(SelectAttraction.this, TestRoute.class);
-                //optimal.putStringArrayListExtra("test",checkedAttractions );
+                Intent optimal = new Intent(SelectAttraction.this, OptimalRoute.class);
+                optimal.putStringArrayListExtra("test",checkedAttractions );
                 startActivity(optimal);
             }
         });
