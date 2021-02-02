@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/attr_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/avg_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avg time spent: "
+        android:textSize="14sp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginLeft="25dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/attr_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avg time spent: "
+        android:textSize="14sp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="min "
+        android:textSize="14sp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"/>
+
+</LinearLayout>

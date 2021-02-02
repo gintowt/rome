@@ -1,13 +1,11 @@
 package com.roma;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.media.MediaParser;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,20 +17,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Attr;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+
+import static java.lang.String.valueOf;
 
 
 public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallback {
@@ -41,6 +36,7 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
     private static final int TILT_LEVEL = 0;
     private static final int BEARING_LEVEL = 0;
     Button btn_next;
+    DatabaseReference attractionDbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +60,8 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
         });
 
 
+        attractionDbRef = FirebaseDatabase.getInstance().getReference().child("SelectedAttractions");
+        attractionDbRef.removeValue();
     }
 
     @Override
@@ -73,9 +71,9 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
         ArrayList<String> total = select_Attraction.getStringArrayListExtra("test");
         ArrayList<LatLng> test = new ArrayList<>();
         ArrayList<String> attraction_name = new ArrayList<>();
+        ArrayList<AttractionLocation> atr_loc = new ArrayList<AttractionLocation>();
         ArrayList<Float> distance = new ArrayList<>();
         int number = total.size();
-        ArrayList<AttractionLocation> atr_loc = new ArrayList<>();
         float[] results = new float[1];
 
         //System.out.println(number);
@@ -124,26 +122,37 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
             distance_between.setAttraction_name(attraction_name.get(i));
             atr_loc.add(distance_between);
             System.out.println("distance: " +distance_between.getLocation_distance() + " name: " + distance_between.getAttraction_name());
-            //System.out.println(atr_loc);
-            addToFirebase(distance_between.getLocation_distance(), distance_between.getAttraction_name(), distance.size());
+            //System.out.println("test:" + atr_loc);
+
+            //addToFirebase(distance_between.getLocation_distance(), distance_between.getAttraction_name(), distance.size());
+            addToFirebase(distance_between.getAttraction_name(), distance_between.getLocation_distance());
         }
 
     }
+    //Float distance, String attraction_name, int size
+    //private void addToFirebase(ArrayList<AttractionLocation> attr_loc, int distance ) {
+    private void addToFirebase(String name, Float distance) {
 
-    private void addToFirebase(Float distance, String attraction_name, int size) {
+        String title = name;
+        Float distance_between = distance;
+
+        AttractionLocation attractionLocation = new AttractionLocation(name, distance);
+        attractionDbRef.push().setValue(attractionLocation);
+
+        /*
         AttractionLocation attraction_location = new AttractionLocation();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
         DatabaseReference selected_attractions = ref.child("SelectedAttractions");
-        attraction_location.setLocation_distance(distance);
-        attraction_location.setAttraction_name(attraction_name);
+        //attraction_location.setLocation_distance(distance);
+        //attraction_location.setAttraction_name(attraction_name);
         //String id = ref.push().getKey();
         //ref.child(id).setValue(attraction_location);
-
-        selected_attractions.child("attraction").setValue(attraction_location);
-
+        for (int i=0; i < distance; i++) {
+            selected_attractions.child("attraction").setValue(attr_loc);
+        }
         //selected_attractions.child("distance").setValue(distance);
-
+         */
     }
 
 
@@ -171,7 +180,7 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
         return p1;
     }
 
-
+/*
     class AttractionLocation {
         Float location_distance;
         String attraction_name;
@@ -199,4 +208,6 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
         }
 
     }
+
+ */
 }
