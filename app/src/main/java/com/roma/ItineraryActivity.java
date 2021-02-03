@@ -55,27 +55,43 @@ public class ItineraryActivity extends AppCompatActivity {
         listDbRef = FirebaseDatabase.getInstance().getReference("AttractionsData");
         //attractionDbRef.orderByChild("location_distance");
         attractionDbRef.orderByChild("location_distance").addValueEventListener(new ValueEventListener() {
+        //listDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //newAttraction.clear();
+                newAttraction.clear();
                 //listArray.clear();
                 for (DataSnapshot attractionDatasnap : snapshot.getChildren()) {
 
                     AttractionLocation attraction = attractionDatasnap.getValue(AttractionLocation.class);
-                    newAttraction.add(attraction);
+                    //System.out.println("name: " +attraction.getAttraction_name() +"avg_time: " +attraction.getAvg_time() );
+                    //newAttraction.add(attraction);
                     //System.out.println("New array: " +newAttraction);
-/*
+
                     listDbRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot attractionListDatasnap : snapshot.getChildren()) {
                                 AttractionLocation attractionList = attractionListDatasnap.getValue(AttractionLocation.class);
+                                if(attractionList.getAttraction_name().equals(attraction.getAttraction_name())){
+                                    System.out.println("Attraction: " +attraction.getAttraction_name() +"  " +String.valueOf(attraction.getLocation_distance())
+                                            +"   AttractionList: " +attractionList.getAttraction_name() +" " +String.valueOf(attractionList.getAvg_time()));
+                                    newAttraction.add(attractionList);
+                                    System.out.println("KURWAAA: " +newAttraction);
+                                   // System.out.println("newAttraction: " +newAttraction);
+                                }
+
+                                /*
                                 if (String.valueOf(attractionList.getAttraction_name()).equals(String.valueOf(attraction.getAttraction_name()))){
                                     newAttraction.add(attractionList);
                                     System.out.println("Test array: " +newAttraction);
                                 }
 
+                                 */
+
                             }
+
+                            ListAdapter adapter = new ListAdapter(ItineraryActivity.this, newAttraction);
+                            myListView.setAdapter(adapter);
 
                         }
 
@@ -84,7 +100,7 @@ public class ItineraryActivity extends AppCompatActivity {
 
                     });
 
- */
+
 
                     /*
                     if (String.valueOf(attraction.getAttraction_name()).equals("Colosseum")) {
@@ -108,8 +124,8 @@ public class ItineraryActivity extends AppCompatActivity {
                      */
 
 
-                    ListAdapter adapter = new ListAdapter(ItineraryActivity.this, newAttraction);
-                    myListView.setAdapter(adapter);
+                    //ListAdapter adapter = new ListAdapter(ItineraryActivity.this, newAttraction);
+                    //myListView.setAdapter(adapter);
                 }
 
 

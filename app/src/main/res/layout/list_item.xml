@@ -1,48 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="horizontal"
     android:padding="5dp">
 
     <TextView
         android:id="@+id/attr_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="16sp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
         android:fontFamily="@font/montserrat"
+        android:text="Title"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/avg_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Avg time spent: "
-        android:textSize="14sp"
+        android:layout_below="@+id/attr_title"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
         android:fontFamily="@font/montserrat"
-        android:layout_marginLeft="25dp"
-        android:textColor="@color/black"/>
+        android:text="Avg time spent: "
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/attr_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Avg time spent: "
-        android:textSize="14sp"
+        android:layout_below="@+id/attr_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/avg_time"
+        android:layout_toRightOf="@+id/avg_time"
         android:fontFamily="@font/montserrat"
-        android:layout_marginLeft="5dp"
-        android:textColor="@color/black"/>
+        android:text="10"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="min "
-        android:textSize="14sp"
+        android:layout_below="@+id/attr_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/attr_distance"
+        android:layout_toRightOf="@+id/attr_distance"
         android:fontFamily="@font/montserrat"
-        android:layout_marginLeft="5dp"
-        android:textColor="@color/black"/>
+        android:text="min "
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/navigate"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/avg_time"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_weight="1"
+        android:background="@drawable/bg_green"
+        android:text="Navigate"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="30dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+</RelativeLayout>

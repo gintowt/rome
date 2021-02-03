@@ -8,14 +8,16 @@ public class AttractionLocation {
     String attraction_name;
     Integer avg_time;
 
-    AttractionLocation (String attraction_name, Float location_distance) {
-        this.attraction_name = attraction_name;
-        this.location_distance = location_distance;
-    }
     AttractionLocation (String attraction_name, Integer avg_time) {
         this.attraction_name = attraction_name;
         this.avg_time = avg_time;
     }
+
+    AttractionLocation (String attraction_name, Float location_distance) {
+        this.attraction_name = attraction_name;
+        this.location_distance = location_distance;
+    }
+
 
     AttractionLocation() {}
 
