@@ -7,7 +7,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -25,26 +28,40 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, RoutingListener {
 
     //google map object
     private GoogleMap mMap;
-
+    DatabaseReference attractionDbRef;
+    ArrayList<String> attractionList;
+    int number = 0;
+    private static final int ZOOM_LEVEL = 15;
+    private static final int TILT_LEVEL = 0;
+    private static final int BEARING_LEVEL = 0;
+    LatLng Start;
+    LatLng End;
     //current and destination location objects
     Location myLocation = null;
     Location destinationLocation = null;
-    protected LatLng start = null;
-    protected LatLng end = null;
+    //protected LatLng start = null;
+    //protected LatLng end = null;
 
     //to get location permissions.
     private final static int LOCATION_REQUEST_CODE = 23;
@@ -56,17 +73,47 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_optimal_route);
-
+        setContentView(R.layout.fragment_maps);
+        attractionDbRef = FirebaseDatabase.getInstance().getReference("SelectedAttractions");
+        attractionList = new ArrayList<>();
         //request location permission.
-        requestPermision();
+        // requestPermision();
 
         //init google map fragment to show map.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.optimal);
+                .findFragmentById(R.id.testRoute);
         mapFragment.getMapAsync(this);
-    }
+        int position = getIntent().getIntExtra("position", 0);
+        System.out.println("TEEEST: "+position);
+        attractionDbRef.orderByChild("location_distance").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                attractionList.clear();
+                for (DataSnapshot attractionDatasnap : snapshot.getChildren()) {
 
+                    AttractionLocation attraction = attractionDatasnap.getValue(AttractionLocation.class);
+                    String name = String.valueOf(attraction.getAttraction_name());
+                    attractionList.add(name);
+                    System.out.println("NAME:   " +attractionList);
+                }
+                if (position < attractionList.size()){
+                    Start = getLocationFromAddress(attractionList.get(position));
+                    End = getLocationFromAddress(attractionList.get(position+1));
+                    Findroutes(Start, End);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
+
+    }
+/*
     private void requestPermision() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -151,10 +198,13 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
 
     }
 
+ */
+
 
     // function to find Routes.
     public void Findroutes(LatLng Start, LatLng End)
     {
+
         if(Start==null || End==null) {
             Toast.makeText(TestRoute.this,"Unable to get location", Toast.LENGTH_LONG).show();
         }
@@ -162,7 +212,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
         {
 
             Routing routing = new Routing.Builder()
-                    .travelMode(AbstractRouting.TravelMode.DRIVING)
+                    .travelMode(AbstractRouting.TravelMode.WALKING)
                     .withListener(this)
                     .alternativeRoutes(true)
                     .waypoints(Start, End)
@@ -190,8 +240,11 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
 
-        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
+        CameraUpdate center = CameraUpdateFactory.newLatLng(Start);
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        CameraPosition camPos = new CameraPosition(Start, ZOOM_LEVEL, TILT_LEVEL, BEARING_LEVEL);
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(camPos));
+
         if(polylines!=null) {
             polylines.clear();
         }
@@ -225,7 +278,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
         //Add Marker on route starting position
         MarkerOptions startMarker = new MarkerOptions();
         startMarker.position(polylineStartLatLng);
-        startMarker.title("My Location");
+        startMarker.title("My location");
         mMap.addMarker(startMarker);
 
         //Add Marker on route ending position
@@ -237,12 +290,41 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void onRoutingCancelled() {
-        Findroutes(start,end);
+        Findroutes(Start,End);
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Findroutes(start,end);
+        Findroutes(Start,End);
 
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+    }
+
+    public LatLng getLocationFromAddress(String strAddress) {
+
+        Geocoder coder = new Geocoder(TestRoute.this, Locale.getDefault());
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            p1 = new LatLng(location.getLatitude(), location.getLongitude());
+
+            return p1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return p1;
     }
 }

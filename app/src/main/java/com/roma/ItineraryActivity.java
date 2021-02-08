@@ -38,8 +38,8 @@ public class ItineraryActivity extends AppCompatActivity {
     List<AttractionLocation> newAttraction;
     ArrayList<String> attractionString;
     //ArrayList<String> mAttraction;
-    List<ListModel> listArray;
-    ListModel listModel = new ListModel();
+    //List<ListModel> listArray;
+    //ListModel listModel = new ListModel();
     Integer avg_time = null;
 
     @Override
@@ -50,7 +50,7 @@ public class ItineraryActivity extends AppCompatActivity {
         myListView = findViewById(R.id.listView);
         newAttraction = new ArrayList<>();
         attractionString = new ArrayList<>();
-        listArray = new ArrayList<>();
+        //listArray = new ArrayList<>();
         attractionDbRef = FirebaseDatabase.getInstance().getReference("SelectedAttractions");
         listDbRef = FirebaseDatabase.getInstance().getReference("AttractionsData");
         //attractionDbRef.orderByChild("location_distance");
@@ -143,7 +143,7 @@ public class ItineraryActivity extends AppCompatActivity {
 
     }
 
-
+/*
 public class ListModel {
 
     String title;
@@ -172,5 +172,7 @@ public class ListModel {
         this.avg_time = avg_time;
     }
 }
+
+ */
 }
 

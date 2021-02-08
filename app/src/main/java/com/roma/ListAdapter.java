@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ public class ListAdapter extends ArrayAdapter {
     List<AttractionLocation> attractionList;
     //List<AttractionLocation> attractionList;
     ArrayList<String> names;
+    String name;
 
     public ListAdapter(Activity mContext, List<AttractionLocation> attractionList) {
         super(mContext, R.layout.list_item, attractionList);
@@ -31,6 +33,35 @@ public class ListAdapter extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        ViewHolder mainViewholder = null;
+        if(convertView == null){
+            LayoutInflater inflater = mContext.getLayoutInflater();
+            convertView = inflater.inflate(R.layout.list_item, parent, false);
+            ViewHolder viewHolder = new ViewHolder();
+            AttractionLocation attractionLocation = attractionList.get(position);
+            viewHolder.title = convertView.findViewById(R.id.attr_title);
+            viewHolder.avg_time = convertView.findViewById(R.id.attr_distance);
+            viewHolder.navigate = convertView.findViewById(R.id.navigate);
+            viewHolder.title.setText(attractionLocation.getAttraction_name());
+            viewHolder.avg_time.setText(String.valueOf(attractionLocation.getAvg_time()));
+            viewHolder.navigate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "Button number " +position +" was clicked!!", Toast.LENGTH_SHORT).show();
+                    Intent plan = new Intent(mContext, TestRoute.class);
+                    System.out.println("POSITION::::"+position);
+                    plan.putExtra("position", position);
+                    mContext.startActivity(plan);
+                }
+            });
+            convertView.setTag(viewHolder);
+        } else {
+            mainViewholder = (ViewHolder) convertView.getTag();
+            mainViewholder.title.setText(String.valueOf(getItem(position)));
+
+        }
+
+        /*
         LayoutInflater inflater = mContext.getLayoutInflater();
         View listItemView = inflater.inflate(R.layout.list_item, null, true);
         TextView title = listItemView.findViewById(R.id.attr_title);
@@ -40,6 +71,7 @@ public class ListAdapter extends ArrayAdapter {
         names = new ArrayList<>();
         //AttractionLocation attractionLocation = attractionList.get(position);
         title.setText(attractionLocation.getAttraction_name());
+        name = String.valueOf(title);
         //distance.setText(String.valueOf(attractionLocation.getLocation_distance()));
         //title.setText(attractionLocation.getTitle());
         distance.setText(String.valueOf(attractionLocation.getAvg_time()));
@@ -48,10 +80,19 @@ public class ListAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 Intent plan = new Intent(getContext(), TestRoute.class);
+                plan.putExtra("title", name);
                 mContext.startActivity(plan);
             }
         });
-        return listItemView;
 
+         */
+        return convertView;
+
+    }
+
+    public class ViewHolder {
+        TextView title;
+        TextView avg_time;
+        Button navigate;
     }
 }
