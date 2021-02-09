@@ -47,7 +47,7 @@ public class ListAdapter extends ArrayAdapter {
             viewHolder.navigate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "Button number " +position +" was clicked!!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "Button number " +position +" was clicked!!", Toast.LENGTH_SHORT).show();
                     Intent plan = new Intent(mContext, TestRoute.class);
                     System.out.println("POSITION::::"+position);
                     plan.putExtra("position", position);

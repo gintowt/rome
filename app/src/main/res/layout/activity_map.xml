@@ -13,12 +13,36 @@
         tools:context=".MainActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-    <RelativeLayout
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/primaryColor"
+        android:fontFamily="@font/montserrat"
+        android:text="MAP"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/white_border">
 
         <ImageButton
@@ -26,11 +50,13 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="320dp"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="304dp"
+            android:layout_marginLeft="304dp"
+            android:layout_marginTop="4dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/search2" />
+            android:src="@drawable/search2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/input_search"
@@ -39,32 +65,34 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="9dp"
-            android:layout_marginLeft="9dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="2dp"
             android:ems="10"
             android:hint="Enter destination"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textColorHint="@color/quantum_grey"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationVew"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-2dp"
-        android:background="@drawable/bg_red_menu"
-        app:itemBackground="@color/secondaryColor"
-        app:itemIconTint="@color/secondaryTextColor"
-        app:itemTextColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginBottom="51dp"
+        android:clickable="true"
+        android:src="@drawable/green_arrow"
+        app:backgroundTint="@color/primaryLightColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu1">
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:rippleColor="@color/background"
+        app:iconTint="@color/background"/>
 
 </RelativeLayout>

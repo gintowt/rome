@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,6 +52,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
     private GoogleMap mMap;
     DatabaseReference attractionDbRef;
     ArrayList<String> attractionList;
+    FloatingActionButton back;
     int number = 0;
     private static final int ZOOM_LEVEL = 15;
     private static final int TILT_LEVEL = 0;
@@ -74,6 +76,8 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_maps);
+        back = findViewById(R.id.floatingActionButton);
+
         attractionDbRef = FirebaseDatabase.getInstance().getReference("SelectedAttractions");
         attractionList = new ArrayList<>();
         //request location permission.
@@ -111,7 +115,14 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
 
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(TestRoute.this,  ItineraryActivity.class);
+                startActivity(back);
 
+            }
+        });
     }
 /*
     private void requestPermision() {

@@ -5,11 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -18,6 +20,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -60,6 +63,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
@@ -79,6 +84,7 @@ import java.util.Locale;
     private static final int TILT_LEVEL = 0;
     private static final int BEARING_LEVEL = 0;
     EditText search_destination;
+    FloatingActionButton back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,7 +92,7 @@ import java.util.Locale;
         setContentView(R.layout.activity_map);
         search = (ImageButton) findViewById(R.id.ic_magnify);
         search_destination = (EditText) findViewById(R.id.input_search);
-
+        back = findViewById(R.id.floatingActionButton);
         SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
@@ -131,6 +137,15 @@ import java.util.Locale;
                 } else {
                     Toast.makeText(MapActivity.this, "Please fill the box", Toast.LENGTH_SHORT).show();
                 }
+
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent home = new Intent(MapActivity.this, MainScreen.class);
+                startActivity(home);
 
             }
         });
@@ -194,6 +209,31 @@ import java.util.Locale;
         currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
     }
 
+     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+             new BottomNavigationView.OnNavigationItemSelectedListener() {
+                 @Override
+                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                         Fragment selectedFragment = null;
+                         switch (item.getItemId()) {
+                             case R.id.item1:
+                                 selectedFragment = new HomeFragment();
+                                 break;
+                             case R.id.item2:
+                                 selectedFragment = new ExploreFragment();
+                                 break;
+                             case R.id.item4:
+                                 selectedFragment = new SettingsFragment();
+                                 break;
+                         }
+                         getSupportFragmentManager().beginTransaction()
+                                 .replace(R.id.fragment_layout
+                                         , selectedFragment).commit();
+
+                         return true;
+                     }
+
+             };
     /*
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
