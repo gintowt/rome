@@ -198,7 +198,7 @@ import java.util.Locale;
         // Output format
         String output = "json";
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyABbtU3WbL9QK3aR6Lo2pYQ2VRLHcXp1bc";
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=@string/google_api_key";
         return url;
     }
 
