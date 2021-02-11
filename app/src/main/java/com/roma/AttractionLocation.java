@@ -7,17 +7,21 @@ public class AttractionLocation {
     Float location_distance;
     String attraction_name;
     Integer avg_time;
+    String imgUrl;
 
-    AttractionLocation (String attraction_name, Integer avg_time) {
+
+    AttractionLocation (String attraction_name, Integer avg_time, String imgUrl) {
         this.attraction_name = attraction_name;
         this.avg_time = avg_time;
+        this.imgUrl = imgUrl;
     }
+
+
 
     AttractionLocation (String attraction_name, Float location_distance) {
         this.attraction_name = attraction_name;
         this.location_distance = location_distance;
     }
-
 
     AttractionLocation() {}
 
@@ -44,4 +48,14 @@ public class AttractionLocation {
     public void setAvg_time(Integer avg_time) {
         this.avg_time = avg_time;
     }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+
 }

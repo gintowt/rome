@@ -36,7 +36,7 @@ public class ItineraryActivity extends AppCompatActivity {
     DatabaseReference listDbRef;
     ListView myListView;
     List<AttractionLocation> newAttraction;
-    ArrayList<String> attractionString;
+    //ArrayList<String> attractionString;
     //ArrayList<String> mAttraction;
     //List<ListModel> listArray;
     //ListModel listModel = new ListModel();
@@ -49,7 +49,7 @@ public class ItineraryActivity extends AppCompatActivity {
 
         myListView = findViewById(R.id.listView);
         newAttraction = new ArrayList<>();
-        attractionString = new ArrayList<>();
+       // attractionString = new ArrayList<>();
         //listArray = new ArrayList<>();
         attractionDbRef = FirebaseDatabase.getInstance().getReference("SelectedAttractions");
         listDbRef = FirebaseDatabase.getInstance().getReference("AttractionsData");

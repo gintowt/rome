@@ -2,16 +2,20 @@ package com.roma;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +46,10 @@ public class ListAdapter extends ArrayAdapter {
             viewHolder.title = convertView.findViewById(R.id.attr_title);
             viewHolder.avg_time = convertView.findViewById(R.id.attr_distance);
             viewHolder.navigate = convertView.findViewById(R.id.navigate);
+            viewHolder.image = convertView.findViewById(R.id.imageView);
             viewHolder.title.setText(attractionLocation.getAttraction_name());
             viewHolder.avg_time.setText(String.valueOf(attractionLocation.getAvg_time()));
+            Picasso.get().load(attractionLocation.getImgUrl()).into(viewHolder.image);
             viewHolder.navigate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -94,5 +100,6 @@ public class ListAdapter extends ArrayAdapter {
         TextView title;
         TextView avg_time;
         Button navigate;
+        ImageView image;
     }
 }

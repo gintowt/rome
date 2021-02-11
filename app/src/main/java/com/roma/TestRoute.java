@@ -100,10 +100,13 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
                     attractionList.add(name);
                     System.out.println("NAME:   " +attractionList);
                 }
-                if (position < attractionList.size()){
+
+                if (position < attractionList.size()-2){
                     Start = getLocationFromAddress(attractionList.get(position));
                     End = getLocationFromAddress(attractionList.get(position+1));
                     Findroutes(Start, End);
+                } else {
+                    Toast.makeText(TestRoute.this, "There is no more attractions to go to!", Toast.LENGTH_SHORT).show();
                 }
 
             }
