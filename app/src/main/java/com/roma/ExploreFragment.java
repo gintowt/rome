@@ -1,11 +1,9 @@
 package com.roma;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +26,8 @@ public class ExploreFragment extends Fragment {
     Button restaurants;
     DatabaseReference listDbRef;
     ListView myListView;
-    List<ExploreDatabase> newAttraction;
+    List<AttractionsDatabase> newAttraction;
+
     public ExploreFragment() {
         // Required empty public constructor
     }
@@ -54,7 +53,7 @@ public class ExploreFragment extends Fragment {
                 newAttraction.clear();
                 for (DataSnapshot attractionDatasnap : snapshot.getChildren()) {
 
-                    ExploreDatabase attractionExplore = attractionDatasnap.getValue(ExploreDatabase.class);
+                    AttractionsDatabase attractionExplore = attractionDatasnap.getValue(AttractionsDatabase.class);
                     newAttraction.add(attractionExplore);
                     System.out.println("ATTRACTION EXPLORE: " +attractionExplore.getName() +" " +attractionExplore.getImgUrl());
                 }

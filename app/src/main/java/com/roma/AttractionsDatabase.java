@@ -1,13 +1,13 @@
 package com.roma;
 
-public class ExploreDatabase {
+public class AttractionsDatabase {
     String Name;
     Integer Avg_time;
     String ImgUrl;
     String Description;
     String Price;
 
-    ExploreDatabase (String Description, Integer Avg_time, String Price, String ImgUrl, String Name) {
+    AttractionsDatabase(String Description, Integer Avg_time, String Price, String ImgUrl, String Name) {
         this.Description = Description;
         this.Avg_time = Avg_time;
         this.Price = Price;
@@ -16,12 +16,12 @@ public class ExploreDatabase {
 
     }
 
-    ExploreDatabase (String ImgUrl, String Name) {
+    AttractionsDatabase(String ImgUrl, String Name) {
         this.ImgUrl = ImgUrl;
         this.Name = Name;
     }
 
-    ExploreDatabase() {}
+    AttractionsDatabase() {}
 
 
     public String getName() {
