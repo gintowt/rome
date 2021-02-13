@@ -87,6 +87,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.testRoute);
         mapFragment.getMapAsync(this);
+
         int position = getIntent().getIntExtra("position", 0);
         System.out.println("TEEEST: "+position);
         attractionDbRef.orderByChild("location_distance").addValueEventListener(new ValueEventListener() {
