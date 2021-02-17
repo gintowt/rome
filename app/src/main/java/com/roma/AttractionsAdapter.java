@@ -1,6 +1,7 @@
 package com.roma;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,10 @@ public class AttractionsAdapter extends ArrayAdapter  {
             viewHolder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent details = new Intent(mContext, AttractionDetail.class);
+                    System.out.println("POSITION::::"+position);
+                    details.putExtra("position", position);
+                    mContext.startActivity(details);
                 }
             });
             convertView.setTag(viewHolder);

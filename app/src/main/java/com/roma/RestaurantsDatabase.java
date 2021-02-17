@@ -7,16 +7,15 @@ public class RestaurantsDatabase {
     Integer Stars;
     String ImgUrl;
     String Cuisines;
-    String Price;
+    String PriceRange;
 
-    RestaurantsDatabase(String Address, String Cuisines, Integer Stars, String Price, String ImgUrl, String Name) {
+    RestaurantsDatabase( String Address, String Cuisines, Integer Stars,  String ImgUrl, String Name, String PriceRange) {
+        this.Address = Address;
         this.Cuisines = Cuisines;
         this.Stars = Stars;
-        this.Price = Price;
         this.ImgUrl = ImgUrl;
         this.Name = Name;
-        this.Address = Address;
-
+        this.PriceRange = PriceRange;
     }
 
     RestaurantsDatabase(String ImgUrl, String Name) {
@@ -60,11 +59,11 @@ public class RestaurantsDatabase {
     }
 
     public String getPrice() {
-        return Price;
+        return PriceRange;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        PriceRange = price;
     }
 
     public String getAddress() {

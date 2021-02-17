@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import com.squareup.picasso.Picasso;
 
@@ -46,7 +45,7 @@ public class RestaurantsAdapter extends ArrayAdapter {
             viewHolder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent details = new Intent(mContext, RestaurantsDetail.class);
+                    Intent details = new Intent(mContext, RestaurantDetail.class);
                     System.out.println("POSITION::::"+position);
                     details.putExtra("position", position);
                     mContext.startActivity(details);
