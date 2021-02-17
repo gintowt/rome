@@ -23,7 +23,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ItineraryActivity"></activity>
+        <activity android:name=".AttractionDetail"></activity>
+        <activity android:name=".RestaurantDetail" />
+        <activity android:name=".ItineraryActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".OptimalRoute" />
         <activity android:name=".TestRoute" />
