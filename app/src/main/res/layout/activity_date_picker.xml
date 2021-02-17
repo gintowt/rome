@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,7 +19,9 @@
         android:layout_marginLeft="26dp"
         android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/arrow_back" />
+        android:src="@drawable/arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/new_iti"
@@ -28,14 +30,17 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="80dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
         android:text="New itinerary"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/red_arrow"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -44,14 +49,16 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
         android:text="Name your trip"
         android:textColor="#000000"
         android:textSize="18dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/red_arrow" />
 
     <EditText
         android:id="@+id/trip_name"
@@ -59,35 +66,50 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
         android:background="#FFFFFF"
         android:fontFamily="@font/montserrat"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <View
+        android:id="@+id/calendarColor"
+        android:layout_width="350dp"
+        android:layout_height="346dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/primaryLightColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start" />
 
     <CalendarView
         android:id="@+id/calendar"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
         android:layout_below="@+id/start"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginRight="22dp"
-        android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
-        android:dateTextAppearance="@style/CalenderViewDateCustomText"
-        android:theme="@style/CalenderViewCustom"
         android:background="@drawable/bg_green"
+        android:dateTextAppearance="@style/CalenderViewDateCustomText"
         android:fontFamily="@font/montserrat"
         android:selectedWeekBackgroundColor="@color/primaryLightColor"
         android:textColor="@color/black"
         android:textStyle="bold"
-        />
+        android:theme="@style/CalenderViewCustom"
+        android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start" />
 
     <Button
         android:id="@+id/button_next"
@@ -96,15 +118,18 @@
         android:layout_below="@+id/calendar"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/start_date"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
-        android:textAlignment="center"
         android:text="Next"
-        android:textSize="20sp"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textStyle="bold" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendar" />
 
     <Button
         android:id="@+id/start"
@@ -113,9 +138,11 @@
         android:layout_below="@+id/trip_name"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="20.5dp"
-        android:layout_marginLeft="20.5dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         android:background="@drawable/start_date"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
@@ -124,18 +151,21 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:backgroundTint="@color/primaryDarkColor" />
+        app:backgroundTint="@color/primaryLightColor"
+        app:layout_constraintEnd_toStartOf="@+id/end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trip_name" />
 
     <Button
         android:id="@+id/end"
-        android:layout_width="175dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/trip_name"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginRight="22dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
         android:background="@drawable/end_date"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
@@ -143,7 +173,10 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:backgroundTint="#FFFFFF" />
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/start"
+        app:layout_constraintTop_toBottomOf="@+id/trip_name" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
