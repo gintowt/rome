@@ -102,7 +102,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
                     System.out.println("NAME:   " +attractionList);
                 }
 
-                if (position < attractionList.size()-2){
+                if (position < attractionList.size()-1){
                     Start = getLocationFromAddress(attractionList.get(position));
                     End = getLocationFromAddress(attractionList.get(position+1));
                     Findroutes(Start, End);
