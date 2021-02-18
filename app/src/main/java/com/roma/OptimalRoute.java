@@ -35,7 +35,7 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
     private static final int ZOOM_LEVEL = 12;
     private static final int TILT_LEVEL = 0;
     private static final int BEARING_LEVEL = 0;
-    Button btn_next;
+    Button btn_next, btn_back;
     DatabaseReference attractionDbRef;
 
     @Override
@@ -50,6 +50,7 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         btn_next = findViewById(R.id.btn_next);
+        btn_back = findViewById(R.id.btn_back);
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +60,13 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(OptimalRoute.this, SelectAttraction.class);
+                startActivity(back);
+            }
+        });
 
         attractionDbRef = FirebaseDatabase.getInstance().getReference().child("SelectedAttractions");
         attractionDbRef.removeValue();

@@ -2,19 +2,29 @@ package com.roma;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.R.layout;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,13 +44,12 @@ public class ItineraryActivity extends AppCompatActivity {
 
     DatabaseReference attractionDbRef;
     DatabaseReference listDbRef;
+    DatabaseReference tripDetails;
     ListView myListView;
     List<AttractionLocation> newAttraction;
-    //ArrayList<String> attractionString;
-    //ArrayList<String> mAttraction;
-    //List<ListModel> listArray;
-    //ListModel listModel = new ListModel();
-    Integer avg_time = null;
+    List<TripDetails> tripDetailsList;
+    ImageButton back;
+    Button next, save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +57,18 @@ public class ItineraryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_itinerary);
 
         myListView = findViewById(R.id.listView);
+        back = findViewById(R.id.imageButton);
+        next = findViewById(R.id.button2);
+        save = findViewById(R.id.save);
         newAttraction = new ArrayList<>();
-       // attractionString = new ArrayList<>();
-        //listArray = new ArrayList<>();
+        tripDetailsList = new ArrayList<>();
+        tripDetails = FirebaseDatabase.getInstance().getReference("TripName");
         attractionDbRef = FirebaseDatabase.getInstance().getReference("SelectedAttractions");
         listDbRef = FirebaseDatabase.getInstance().getReference("AttractionsData");
-        //attractionDbRef.orderByChild("location_distance");
         attractionDbRef.orderByChild("location_distance").addValueEventListener(new ValueEventListener() {
-        //listDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 newAttraction.clear();
-                //listArray.clear();
                 for (DataSnapshot attractionDatasnap : snapshot.getChildren()) {
 
                     AttractionLocation attraction = attractionDatasnap.getValue(AttractionLocation.class);
@@ -79,15 +88,6 @@ public class ItineraryActivity extends AppCompatActivity {
                                     System.out.println("KURWAAA: " +newAttraction);
                                    // System.out.println("newAttraction: " +newAttraction);
                                 }
-
-                                /*
-                                if (String.valueOf(attractionList.getAttraction_name()).equals(String.valueOf(attraction.getAttraction_name()))){
-                                    newAttraction.add(attractionList);
-                                    System.out.println("Test array: " +newAttraction);
-                                }
-
-                                 */
-
                             }
 
                             ListAdapter adapter = new ListAdapter(ItineraryActivity.this, newAttraction);
@@ -100,32 +100,6 @@ public class ItineraryActivity extends AppCompatActivity {
 
                     });
 
-
-
-                    /*
-                    if (String.valueOf(attraction.getAttraction_name()).equals("Colosseum")) {
-                        avg_time = 60;
-                        listModel.setTitle(attraction.getAttraction_name());
-                        listModel.setAvg_time(avg_time);
-                        listArray.add(listModel);
-                    } else {
-                        if (String.valueOf(attraction.getAttraction_name()).equals("Pantheon")) {
-                            avg_time = 60;
-                            listModel.setTitle(attraction.getAttraction_name());
-                            listModel.setAvg_time(avg_time);
-                            listArray.add(listModel);
-                        } else {
-                        }
-
-
-                        //newAttraction.add(attraction);
-                        System.out.println("newAttraction: " + listArray);
-
-                     */
-
-
-                    //ListAdapter adapter = new ListAdapter(ItineraryActivity.this, newAttraction);
-                    //myListView.setAdapter(adapter);
                 }
 
 
@@ -137,12 +111,90 @@ public class ItineraryActivity extends AppCompatActivity {
 
             });
 
+        tripDetails.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot tripDataSnap : snapshot.getChildren()) {
+                    TripDetails tripDetails = tripDataSnap.getValue(TripDetails.class);
+                    tripDetails.getName();
+                    tripDetails.getDate();
+                    tripDetailsList.add(tripDetails);
+                    System.out.println("KURWICA: " +tripDetails.getName());
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(ItineraryActivity.this, OptimalRoute.class);
+                startActivity(back);
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next = new Intent(ItineraryActivity.this, MainScreen.class);
+                startActivity(next);
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //openDialog();
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ItineraryActivity.this);
+                alertDialogBuilder.setTitle("Save.");
+                alertDialogBuilder.setMessage("Do you want to save this trip?");
+                alertDialogBuilder.setCancelable(false);
+                alertDialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                                           // FirebaseDatabase.getInstance().getReference("SavedTrip").setValue(tripDetailsList);
+                                            FirebaseDatabase.getInstance().getReference("SavedTrip").setValue(newAttraction).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+                                                        Toast.makeText(ItineraryActivity.this, "Saved.", Toast.LENGTH_LONG).show();
+                                                    }
+                                                    else{
+                                                        Toast.makeText(ItineraryActivity.this, "Failed to save. Try again!", Toast.LENGTH_LONG).show();
+                                                    }
+
+                                                }
+                                            });
+                                        }
+                                });
+
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(ItineraryActivity.this, "you clicked on cancel", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
 
 
     }
 
+/*
+    public void openDialog() {
+        SaveDialog saveDialog = new SaveDialog();
+        saveDialog.show(getSupportFragmentManager(), "save dialog");
+    }
+
+ */
 /*
 public class ListModel {
 
