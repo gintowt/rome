@@ -4,12 +4,17 @@ package com.roma;
 public class TripDetails {
 
     String trip_name;
-    Integer date;
+    String date;
 
-    public TripDetails(String trip_name, Integer date) {
+    public TripDetails(String date, String trip_name) {
+        this.date = date;
         this.trip_name = trip_name;
+    }
+
+    public TripDetails(String date){
         this.date = date;
     }
+
 
     public TripDetails(){}
 
@@ -21,11 +26,11 @@ public class TripDetails {
         this.trip_name = trip_name;
     }
 
-    public Integer getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Integer date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

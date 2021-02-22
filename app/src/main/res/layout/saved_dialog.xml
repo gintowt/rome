@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <EditText
+        android:id="@+id/trip_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter trip name"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat"
+        android:textColorHint="@color/quantum_grey"
+        android:layout_marginLeft="10dp"/>
+
+</LinearLayout>
