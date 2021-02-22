@@ -33,31 +33,35 @@ public class AttractionsAdapter extends ArrayAdapter  {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        AttractionsAdapter.ViewHolder mainViewholder = null;
+        AttractionsAdapter.ViewHolder viewHolder;
         if(convertView == null){
             LayoutInflater inflater = mContext.getLayoutInflater();
             convertView = inflater.inflate(R.layout.explore_list, parent, false);
-            AttractionsAdapter.ViewHolder viewHolder = new AttractionsAdapter.ViewHolder();
-            AttractionsDatabase attractionExplore = attractionList.get(position);
-            viewHolder.title = convertView.findViewById(R.id.title);
-            viewHolder.image = convertView.findViewById(R.id.imageButton1);
-            viewHolder.title.setText(attractionExplore.getName());
-            Picasso.get().load(attractionExplore.getImgUrl()).into(viewHolder.image);
-            viewHolder.image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent details = new Intent(mContext, AttractionDetail.class);
-                    System.out.println("POSITION::::"+position);
-                    details.putExtra("position", position);
-                    mContext.startActivity(details);
-                }
-            });
-            convertView.setTag(viewHolder);
-        } else {
-            mainViewholder = (AttractionsAdapter.ViewHolder) convertView.getTag();
-            mainViewholder.title.setText(String.valueOf(getItem(position)));
 
-        }
+        } /*else {
+            viewHolder = (AttractionsAdapter.ViewHolder) convertView.getTag();
+            //mainViewholder.title.setText(String.valueOf(getItem(position)));
+
+        }*/
+
+        viewHolder = new AttractionsAdapter.ViewHolder();
+        AttractionsDatabase attractionExplore = attractionList.get(position);
+        viewHolder.title = convertView.findViewById(R.id.title);
+        viewHolder.image = convertView.findViewById(R.id.imageButton1);
+        viewHolder.title.setText(attractionExplore.getName());
+        Picasso.get().load(attractionExplore.getImgUrl()).resize(900, 900).into(viewHolder.image);
+        viewHolder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent details = new Intent(mContext, AttractionDetail.class);
+                System.out.println("POSITION::::"+position);
+                details.putExtra("position", position);
+                mContext.startActivity(details);
+            }
+        });
+        convertView.setTag(viewHolder);
+
+
         return convertView;
 
     }

@@ -36,7 +36,7 @@
 
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/savedListView"
         android:layout_width="400dp"
         android:layout_height="450dp"
         android:layout_marginTop="40dp"
@@ -63,7 +63,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        app:layout_constraintTop_toBottomOf="@+id/savedListView" />
 
     <Button
         android:id="@+id/button2"
@@ -78,7 +78,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/save"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        app:layout_constraintTop_toBottomOf="@+id/savedListView" />
 
 
 

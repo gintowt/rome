@@ -43,7 +43,7 @@ public class ExploreRestaurantsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_explore_restaurants, container, false);
         attractions = v.findViewById(R.id.btn_attraction);
-        myListView = v.findViewById(R.id.listView);
+        myListView = v.findViewById(R.id.savedListView);
         newAttraction = new ArrayList<>();
         listDbRef = FirebaseDatabase.getInstance().getReference("RestaurantsExplore");
         listDbRef.orderByChild("Name").addValueEventListener(new ValueEventListener() {

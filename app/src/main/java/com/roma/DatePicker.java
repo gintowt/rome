@@ -34,27 +34,32 @@ public class DatePicker extends AppCompatActivity {
         calendar = findViewById(R.id.calendar);
         //name.getText().toString();
 
-        reference = database.getInstance().getReference().child("TripName");
+        //reference = database.getInstance().getReference().child("TripName");
+        reference = database.getInstance().getReference().child("Date");
 
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                selectedDate = dayOfMonth + "." + (month+1) + "." + year;
+                if(month+1 < 10)
+                {
+                    selectedDate = dayOfMonth + "." + "0" + (month+1) + "." + year;
+                } else
+                    selectedDate = dayOfMonth + "." + (month+1) + "." + year;
             }
         });
         next.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                trip_name = name.getText().toString().trim();
-                if(!trip_name.isEmpty()) {
+                //trip_name = name.getText().toString().trim();
+                //if(!trip_name.isEmpty()) {
                     Intent i = new Intent(DatePicker.this , SelectAttraction.class);
-                    reference.child("trip_name").setValue(trip_name);
+                    //reference.child("trip_name").setValue(trip_name);
                     reference.child("date").setValue(selectedDate);
                     startActivity(i);
-                } else {
-                    Toast.makeText(DatePicker.this, "Trip name is missing! Fill the box.", Toast.LENGTH_LONG).show();
-                }
-            }
+                }// else {
+                  //  Toast.makeText(DatePicker.this, "Trip name is missing! Fill the box.", Toast.LENGTH_LONG).show();
+                //}
+            //}
         });
     }
 }

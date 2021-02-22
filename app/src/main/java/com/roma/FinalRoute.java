@@ -1,14 +1,9 @@
 package com.roma;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -45,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
+public class FinalRoute extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, RoutingListener {
 
     //google map object
@@ -107,7 +102,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
                     End = getLocationFromAddress(attractionList.get(position+1));
                     Findroutes(Start, End);
                 } else {
-                    Toast.makeText(TestRoute.this, "There is no more attractions to go to!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FinalRoute.this, "There is no more attractions to go to!", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -122,7 +117,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent back = new Intent(TestRoute.this,  ItineraryActivity.class);
+                Intent back = new Intent(FinalRoute.this,  ItineraryActivity.class);
                 startActivity(back);
 
             }
@@ -221,7 +216,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
     {
 
         if(Start==null || End==null) {
-            Toast.makeText(TestRoute.this,"Unable to get location", Toast.LENGTH_LONG).show();
+            Toast.makeText(FinalRoute.this,"Unable to get location", Toast.LENGTH_LONG).show();
         }
         else
         {
@@ -248,7 +243,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void onRoutingStart() {
-        Toast.makeText(TestRoute.this,"Finding Route...",Toast.LENGTH_LONG).show();
+        Toast.makeText(FinalRoute.this,"Finding Route...",Toast.LENGTH_LONG).show();
     }
 
     //If Route finding success..
@@ -321,7 +316,7 @@ public class TestRoute extends FragmentActivity implements OnMapReadyCallback,
 
     public LatLng getLocationFromAddress(String strAddress) {
 
-        Geocoder coder = new Geocoder(TestRoute.this, Locale.getDefault());
+        Geocoder coder = new Geocoder(FinalRoute.this, Locale.getDefault());
         List<Address> address;
         LatLng p1 = null;
 

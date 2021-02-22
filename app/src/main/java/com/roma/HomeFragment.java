@@ -69,6 +69,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        saved = v.findViewById(R.id.saved);
+        saved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent saved = new Intent(getActivity(), SavedTrips.class);
+                startActivity(saved);
+            }
+        });
+
         return v;
     }
 

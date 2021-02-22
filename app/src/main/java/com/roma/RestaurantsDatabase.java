@@ -58,7 +58,7 @@ public class RestaurantsDatabase {
         Cuisines = description;
     }
 
-    public String getPrice() {
+    public String getPriceRange() {
         return PriceRange;
     }
 

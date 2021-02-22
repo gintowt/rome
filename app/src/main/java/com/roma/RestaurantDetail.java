@@ -53,10 +53,10 @@ public class RestaurantDetail extends AppCompatActivity {
                     RestaurantsDatabase show = restaurantDetails.get(position);
                     name.setText(show.getName());
                     cuisine.setText(show.getCuisines());
-                    price.setText(show.getPrice());
+                    price.setText(show.getPriceRange());
                     address.setText(show.getAddress());
                     stars.setText(String.valueOf(show.getStars()));
-                    Picasso.get().load(show.getImgUrl()).into(image);
+                    Picasso.get().load(show.getImgUrl()).resize(900,900).into(image);
                 }
 
 

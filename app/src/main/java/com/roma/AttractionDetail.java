@@ -52,7 +52,7 @@ public class AttractionDetail extends AppCompatActivity {
                     description.setText(show.getDescription());
                     price.setText(show.getPrice());
                     avg_time.setText(String.valueOf(show.getAvg_time()));
-                    Picasso.get().load(show.getImgUrl()).into(image);
+                    Picasso.get().load(show.getImgUrl()).resize(900,900).into(image);
                 }
 
 
