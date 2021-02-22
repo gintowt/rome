@@ -23,12 +23,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AttractionDetail"></activity>
+        <activity android:name=".SavedTrips"></activity>
+        <activity android:name=".AttractionDetail" />
         <activity android:name=".RestaurantDetail" />
         <activity android:name=".ItineraryActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".OptimalRoute" />
-        <activity android:name=".TestRoute" />
+        <activity android:name=".FinalRoute" />
         <activity android:name=".SelectAttraction" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
