@@ -23,7 +23,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SavedTrips"></activity>
+        <activity
+            android:name=".SavedActivity"
+            android:label="@string/title_activity_saved"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SavedTrips" />
         <activity android:name=".AttractionDetail" />
         <activity android:name=".RestaurantDetail" />
         <activity android:name=".ItineraryActivity" />
