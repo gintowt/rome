@@ -43,18 +43,18 @@ public class TripAdapter extends ArrayAdapter {
 
         viewHolder = new TripAdapter.ViewHolder();
         TripDetails tripDetails = tripsList.get(position);
-        //viewHolder.trip_name = convertView.findViewById(R.id.name_trip);
+        viewHolder.trip_name = convertView.findViewById(R.id.name_trip);
         viewHolder.date = convertView.findViewById(R.id.date);
         viewHolder.view = convertView.findViewById(R.id.view3);
         viewHolder.image = convertView.findViewById(R.id.imageView);
-        //viewHolder.trip_name.setText(tripDetails.getName());
+        viewHolder.trip_name.setText(tripDetails.getName());
         viewHolder.date.setText(tripDetails.getDate());
         //Picasso.get().load(attractionLocation.getImgUrl()).into(viewHolder.image);
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(mContext, "Button number " +position +" was clicked!!", Toast.LENGTH_SHORT).show();
-                Intent plan = new Intent(mContext, ItineraryActivity.class);
+                Intent plan = new Intent(mContext, SavedActivity.class);
                 System.out.println("POSITION::::"+position);
                 plan.putExtra("position_saved", position);
                 mContext.startActivity(plan);
@@ -67,7 +67,7 @@ public class TripAdapter extends ArrayAdapter {
     }
 
     public class ViewHolder {
-        //TextView trip_name;
+        TextView trip_name;
         TextView date;
         ImageView image;
         View view;

@@ -33,7 +33,7 @@ public class SavedTrips extends AppCompatActivity {
         myListView = findViewById(R.id.savedListView);
         back = findViewById(R.id.floatingActionButton2);
         tripList = new ArrayList<>();
-        savedDb = FirebaseDatabase.getInstance().getReference("date");
+        savedDb = FirebaseDatabase.getInstance().getReference("SavedTrip");
 
         savedDb.addValueEventListener(new ValueEventListener() {
             @Override
@@ -41,11 +41,12 @@ public class SavedTrips extends AppCompatActivity {
                 tripList.clear();
                 for (DataSnapshot tripDetail : snapshot.getChildren()) {
                     //TripDetails tDetails = tripDetail.getValue(TripDetails.class);
-                    //String key = tripDetail.getKey();
-                    String date_value = tripDetail.getValue(String.class);
-                    TripDetails tDetails = new TripDetails(date_value);
+                    String key = tripDetail.getKey();
+                    String date_value = tripDetail.child("date").getValue(String.class);
+                    TripDetails keyDetails = new TripDetails(key, date_value);
                     //System.out.println("TRIP LIST: " + tDetails.getDate());
-                    tripList.add(tDetails);
+                    tripList.add(keyDetails);
+                    //tripList.add(tDetails);
                     System.out.println("TRIP LIST: " +tripList );
 
                 }

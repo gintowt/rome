@@ -5,20 +5,36 @@ public class TripDetails {
 
     String trip_name;
     String date;
+    String attraction_name;
+    String imgUrl;
+    Integer avg_time;
 
-    public TripDetails(String date, String trip_name) {
+    public TripDetails( String imgUrl , String attraction_name, Integer avg_time, String date) {
+        this.imgUrl = imgUrl;
+        this.attraction_name = attraction_name;
+        this.avg_time = avg_time;
         this.date = date;
+    }
+
+
+    public TripDetails(String imgUrl, String attraction_name,  Integer avg_time) {
+        this.attraction_name = attraction_name;
+        this.imgUrl = imgUrl;
+        this.avg_time = avg_time;
+    }
+
+    public TripDetails( String trip_name, String date){
         this.trip_name = trip_name;
-    }
-
-    public TripDetails(String date){
         this.date = date;
     }
 
+    TripDetails(String date){
+        this.date = date;
+    }
 
     public TripDetails(){}
 
-    public String getName() {
+   public String getName() {
         return trip_name;
     }
 
@@ -33,4 +49,29 @@ public class TripDetails {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String getAttraction_name() {
+        return attraction_name;
+    }
+
+    public void setAttraction_name(String attraction_name) {
+        this.attraction_name = attraction_name;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public Integer getAvg_time() {
+        return avg_time;
+    }
+
+    public void setAvg_time(Integer avg_time) {
+        this.avg_time = avg_time;
+    }
 }
+
