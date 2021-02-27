@@ -1,6 +1,9 @@
 package com.roma;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +27,7 @@ public class RestaurantDetail extends AppCompatActivity {
     ImageView image;
     DatabaseReference listDbRef;
     List<RestaurantsDatabase> restaurantDetails;
+    Button back, navigate;
 
 
     @Override
@@ -39,6 +43,8 @@ public class RestaurantDetail extends AppCompatActivity {
         address = findViewById(R.id.price);
         stars = findViewById(R.id.stars);
         image = findViewById(R.id.imageView2);
+        back = findViewById(R.id.back);
+        navigate = findViewById(R.id.navigate);
 
         listDbRef.orderByChild("Name").addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,6 +71,15 @@ public class RestaurantDetail extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(RestaurantDetail.this, MainScreen.class);
+                back.putExtra("back", 2);
+                startActivity(back);
             }
         });
 

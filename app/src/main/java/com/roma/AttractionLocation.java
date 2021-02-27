@@ -16,8 +16,6 @@ public class AttractionLocation {
         this.imgUrl = imgUrl;
     }
 
-
-
     AttractionLocation (String attraction_name, Float location_distance) {
         this.attraction_name = attraction_name;
         this.location_distance = location_distance;

@@ -1,6 +1,7 @@
 package com.roma;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,9 @@ public class Adapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, title_model , Toast.LENGTH_SHORT).show();
+              Intent show = new Intent(context, RecommendedItinerary.class);
+              show.putExtra("title", title_model);
+              context.startActivity(show);
             }
         });
 

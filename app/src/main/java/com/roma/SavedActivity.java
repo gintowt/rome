@@ -34,7 +34,7 @@ public class SavedActivity extends AppCompatActivity {
     DatabaseReference attractionDbRef;
     DatabaseReference listDbRef;
     DatabaseReference tripDetails;
-    DatabaseReference tripDateDb;
+    //DatabaseReference tripDateDb;
     ListView myListView;
     List<AttractionLocation> newAttraction;
     List<TripDetails> tripDetailsList;
@@ -53,7 +53,7 @@ public class SavedActivity extends AppCompatActivity {
         tripDetails = FirebaseDatabase.getInstance().getReference("TripName");
         attractionDbRef = FirebaseDatabase.getInstance().getReference("SelectedAttractions");
         listDbRef = FirebaseDatabase.getInstance().getReference("AttractionsData");
-        tripDateDb = FirebaseDatabase.getInstance().getReference("Date");
+        //tripDateDb = FirebaseDatabase.getInstance().getReference("Date");
         attractionDbRef.orderByChild("location_distance").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -48,7 +48,9 @@ public class TripAdapter extends ArrayAdapter {
         viewHolder.view = convertView.findViewById(R.id.view3);
         viewHolder.image = convertView.findViewById(R.id.imageView);
         viewHolder.trip_name.setText(tripDetails.getName());
-        viewHolder.date.setText(tripDetails.getDate());
+        if(!String.valueOf(tripDetails.getDate()).isEmpty()) {
+            viewHolder.date.setText(tripDetails.getDate());
+        }
         //Picasso.get().load(attractionLocation.getImgUrl()).into(viewHolder.image);
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override

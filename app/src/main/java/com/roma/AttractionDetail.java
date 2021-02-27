@@ -3,7 +3,10 @@ package com.roma;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ public class AttractionDetail extends AppCompatActivity {
     ImageView image;
     DatabaseReference listDbRef;
     List<AttractionsDatabase> attractionsDetails;
+    Button back, navigate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,8 @@ public class AttractionDetail extends AppCompatActivity {
         avg_time = findViewById(R.id.time);
         price = findViewById(R.id.price);
         image = findViewById(R.id.imageView2);
+        back = findViewById(R.id.back);
+        navigate = findViewById(R.id.navigate);
 
         listDbRef.orderByChild("Name").addValueEventListener(new ValueEventListener() {
             @Override
@@ -61,6 +67,15 @@ public class AttractionDetail extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(AttractionDetail.this, MainScreen.class);
+                back.putExtra("back", 1);
+                startActivity(back);
             }
         });
 

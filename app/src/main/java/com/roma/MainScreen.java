@@ -19,18 +19,24 @@ public class MainScreen extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationVew);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_layout, new HomeFragment()).commit();
+        int back = getIntent().getIntExtra("back", 0);
+            System.out.print(back);
+        if (back == 1) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_layout, new ExploreFragment()).commit();
+        } else if(back == 2) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_layout, new ExploreRestaurantsFragment()).commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_layout, new HomeFragment()).commit();
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
-
                     if (item.getItemId() == R.id.item3) {
                         Intent mapAct = new Intent(MainScreen.this, MapActivity.class);
                         startActivity(mapAct);
