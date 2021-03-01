@@ -57,6 +57,7 @@ public class FinalRoute extends FragmentActivity implements OnMapReadyCallback,
     //current and destination location objects
     Location myLocation = null;
     Location destinationLocation = null;
+
     //protected LatLng start = null;
     //protected LatLng end = null;
 
@@ -84,35 +85,68 @@ public class FinalRoute extends FragmentActivity implements OnMapReadyCallback,
         mapFragment.getMapAsync(this);
 
         int position = getIntent().getIntExtra("position", 0);
+        int position_recommended = getIntent().getIntExtra("position_recommended", 0);
+
         System.out.println("TEEEST: "+position);
-        attractionDbRef.orderByChild("location_distance").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                attractionList.clear();
-                for (DataSnapshot attractionDatasnap : snapshot.getChildren()) {
+        if(position != 0) {
+            attractionDbRef.orderByChild("location_distance").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    attractionList.clear();
+                    for (DataSnapshot attractionDatasnap : snapshot.getChildren()) {
 
-                    AttractionLocation attraction = attractionDatasnap.getValue(AttractionLocation.class);
-                    String name = String.valueOf(attraction.getAttraction_name());
-                    attractionList.add(name);
-                    System.out.println("NAME:   " +attractionList);
+                        AttractionLocation attraction = attractionDatasnap.getValue(AttractionLocation.class);
+                        String name = String.valueOf(attraction.getAttraction_name());
+                        attractionList.add(name);
+                        System.out.println("NAME:   " + attractionList);
+                    }
+
+                    if (position < attractionList.size() - 1) {
+                        Start = getLocationFromAddress(attractionList.get(position));
+                        End = getLocationFromAddress(attractionList.get(position + 1));
+                        Findroutes(Start, End);
+                    } else {
+                        Toast.makeText(FinalRoute.this, "There is no more attractions to go to!", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
-                if (position < attractionList.size()-1){
-                    Start = getLocationFromAddress(attractionList.get(position));
-                    End = getLocationFromAddress(attractionList.get(position+1));
-                    Findroutes(Start, End);
-                } else {
-                    Toast.makeText(FinalRoute.this, "There is no more attractions to go to!", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
 
-            }
+            });
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        if(position_recommended != 0) {
+            attractionDbRef = FirebaseDatabase.getInstance().getReference("RecommendedItinerary");
+            attractionDbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    attractionList.clear();
+                    for (DataSnapshot recommendedSnapshot : snapshot.getChildren()) {
+                        RecommendedModel attraction = recommendedSnapshot.getValue(RecommendedModel.class);
+                        String name = String.valueOf(attraction.getAttraction_name());
+                        attractionList.add(name);
+                    }
 
-            }
+                    if (position_recommended < attractionList.size() - 1) {
+                        Start = getLocationFromAddress(attractionList.get(position_recommended));
+                        End = getLocationFromAddress(attractionList.get(position_recommended + 1));
+                        Findroutes(Start, End);
+                    } else {
+                        Toast.makeText(FinalRoute.this, "There is no more attractions to go to!", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

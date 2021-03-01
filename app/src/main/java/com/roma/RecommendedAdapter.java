@@ -55,7 +55,7 @@ public class RecommendedAdapter extends ArrayAdapter {
         // title.setText(attractionLocation.getAttraction_name());
         viewHolder.avg_time.setText(String.valueOf(recommendedModel.getAvg_time()));
         // avg_time.setText(String.valueOf(attractionLocation.getAvg_time()));
-        Picasso.get().load(recommendedModel.getImgUrl()).into(viewHolder.image);
+        Picasso.get().load(recommendedModel.getImgUrl()).resize(300,300).into(viewHolder.image);
         // Picasso.get().load(attractionLocation.getImgUrl()).into(image);
         viewHolder.navigate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class RecommendedAdapter extends ArrayAdapter {
                 //Toast.makeText(mContext, "Button number " +position +" was clicked!!", Toast.LENGTH_SHORT).show();
                 Intent plan = new Intent(mContext, FinalRoute.class);
                 System.out.println("POSITION::::" + position);
-                plan.putExtra("position", position);
+                plan.putExtra("position_recommended", position);
                 mContext.startActivity(plan);
             }
         });
