@@ -81,6 +81,7 @@
         android:layout_toRightOf="@+id/imageView"
         android:layout_weight="1"
         android:background="@drawable/bg_green"
+        android:drawableRight="@drawable/ic_assistant_direction_white_18dp"
         android:text="Navigate"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />

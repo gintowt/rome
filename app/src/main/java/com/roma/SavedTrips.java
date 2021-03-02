@@ -43,12 +43,13 @@ public class SavedTrips extends AppCompatActivity {
                     //TripDetails tDetails = tripDetail.getValue(TripDetails.class);
                     String key = tripDetail.getKey();
                     String date_value = tripDetail.child("date").getValue(String.class);
+                    String image = tripDetail.child("imgUrl").getValue(String.class);
                     if(date_value == null){
-                        TripDetails keyValue = new TripDetails(key, null);
+                        TripDetails keyValue = new TripDetails(key, null, image);
                         tripList.add(keyValue);
 
                     } else {
-                        TripDetails keyDetails = new TripDetails(key, date_value);
+                        TripDetails keyDetails = new TripDetails(key, date_value, image);
                         //System.out.println("TRIP LIST: " + tDetails.getDate());
                         tripList.add(keyDetails);
                         //tripList.add(tDetails);

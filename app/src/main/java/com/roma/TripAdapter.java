@@ -51,7 +51,7 @@ public class TripAdapter extends ArrayAdapter {
         if(!String.valueOf(tripDetails.getDate()).isEmpty()) {
             viewHolder.date.setText(tripDetails.getDate());
         }
-        //Picasso.get().load(attractionLocation.getImgUrl()).into(viewHolder.image);
+        Picasso.get().load("@/drawable/recommended1").into(viewHolder.image);
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -25,9 +25,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Avatars"
+            android:label="@string/title_activity_avatars"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".RecommendedItinerary"
             android:label="@string/title_activity_recommended_itinerary"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SavedActivity" />
         <activity android:name=".SavedTrips" />
         <activity android:name=".AttractionDetail" />

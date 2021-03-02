@@ -23,9 +23,10 @@ public class TripDetails {
         this.avg_time = avg_time;
     }
 
-    public TripDetails( String trip_name, String date){
+    public TripDetails( String trip_name, String date, String imgUrl){
         this.trip_name = trip_name;
         this.date = date;
+        this.imgUrl = imgUrl;
     }
 
     TripDetails(String date){

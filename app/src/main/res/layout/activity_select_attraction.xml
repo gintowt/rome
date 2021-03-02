@@ -148,12 +148,13 @@
 
     <Button
         android:id="@+id/next"
-        android:layout_width="107dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pantheon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_green"
+        android:drawableRight="@drawable/ic_arrow_forward_ios_white_18dp"
         android:text="Next"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

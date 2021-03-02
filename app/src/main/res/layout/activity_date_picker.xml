@@ -121,6 +121,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:background="@drawable/start_date"
+        android:drawableRight="@drawable/ic_arrow_forward_ios_white_18dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:text="Next"
