@@ -60,7 +60,7 @@ public class Registration extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent = new Intent(Registration.this, MainScreen.class);
+                Intent mainIntent = new Intent(Registration.this, Avatars.class);
                 Toast.makeText(Registration.this, "Registration completed", Toast.LENGTH_SHORT).show();
                 registerUser();
                 startActivity(mainIntent);

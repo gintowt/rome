@@ -7,40 +7,88 @@
     android:background="@color/background"
     tools:context=".Avatars">
 
-    <ImageButton
-        android:id="@+id/imageButton5"
+    <Button
+        android:id="@+id/select_foodie"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_green"
+        android:text="Select"
+        android:textColor="@color/secondaryTextColor"
+        android:textStyle="bold"
+        app:backgroundTint="@color/primaryLightColor"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodie" />
+
+    <Button
+        android:id="@+id/select_veteran"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_green"
+        android:text="Select"
+        android:textColor="@color/secondaryTextColor"
+        android:textStyle="bold"
+        app:backgroundTint="@color/primaryLightColor"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/select_foodie"
+        app:layout_constraintTop_toBottomOf="@+id/veteran" />
+
+    <Button
+        android:id="@+id/select_artist"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_green"
+        android:text="Select"
+        android:textColor="@color/secondaryTextColor"
+        android:textStyle="bold"
+        app:backgroundTint="@color/primaryLightColor"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/select_newbie"
+        app:layout_constraintTop_toBottomOf="@+id/artist" />
+
+    <ImageView
+        android:id="@+id/veteran"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton3"
-        app:srcCompat="@drawable/newbie" />
+        app:layout_constraintStart_toEndOf="@+id/foodie"
+        app:layout_constraintTop_toBottomOf="@+id/artist"
+        app:srcCompat="@drawable/veteran" />
 
-    <ImageButton
-        android:id="@+id/imageButton4"
+    <ImageView
+        android:id="@+id/foodie"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-        app:srcCompat="@drawable/newbie" />
+        app:layout_constraintTop_toBottomOf="@+id/newbie"
+        app:srcCompat="@drawable/foodie" />
 
-    <ImageButton
-        android:id="@+id/imageButton3"
+    <ImageView
+        android:id="@+id/artist"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/newbie"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:srcCompat="@drawable/newbie" />
+        app:srcCompat="@drawable/artist" />
 
     <TextView
         android:id="@+id/textView2"
@@ -55,8 +103,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
+    <ImageView
+        android:id="@+id/newbie"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="30dp"
@@ -65,6 +113,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:srcCompat="@drawable/newbie" />
+
+    <Button
+        android:id="@+id/select_newbie"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_green"
+        android:text="Select"
+        android:textColor="@color/secondaryTextColor"
+        android:textStyle="bold"
+        app:backgroundTint="@color/primaryLightColor"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newbie" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
