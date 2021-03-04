@@ -79,7 +79,7 @@ public class OptimalRoute extends AppCompatActivity implements OnMapReadyCallbac
         ArrayList<String> total = select_Attraction.getStringArrayListExtra("test");
         ArrayList<LatLng> test = new ArrayList<>();
         ArrayList<String> attraction_name = new ArrayList<>();
-        ArrayList<AttractionLocation> atr_loc = new ArrayList<AttractionLocation>();
+        ArrayList<AttractionLocation> atr_loc = new ArrayList<>();
         ArrayList<Float> distance = new ArrayList<>();
         int number = total.size();
         float[] results = new float[1];

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,12 +16,21 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
 
 public class SettingsFragment extends Fragment {
 
 
     Button profile, password, delete, logOut, notification;
     ImageView avatar;
+    DatabaseReference avatarsDbRef;
+    String imgUrl;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -42,7 +52,33 @@ public class SettingsFragment extends Fragment {
         logOut = v.findViewById(R.id.logOut);
         notification = v.findViewById(R.id.notification);
         avatar = v.findViewById(R.id.avatar);
+        avatarsDbRef = FirebaseDatabase.getInstance().getReference("Avatar");
+        avatarsDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot avatarDetail : snapshot.getChildren()){
+                    String name = avatarDetail.child("name").getValue(String.class);
+                    if(name == "newbie"){
+                        imgUrl = "@drawable/newbie";
+                    }
+                    if(name == "artist") {
+                        imgUrl = "@drawable/artist";
+                    }
+                    if(name == "foodie") {
+                        imgUrl = "@drawable/foodie";
+                    }
+                    if(name == "veteran") {
+                        imgUrl = "@drawable/veteran";
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+       // Picasso.get().load("@drawable/veteran").resize(100, 100).into(avatar);
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
