@@ -12,6 +12,9 @@ public class RecommendedModel {
         imgUrl = image;
     }
 
+    public RecommendedModel(String attraction_name){
+        this.attraction_name = attraction_name;
+    }
     public RecommendedModel(){}
 
     public String getAttraction_name() {

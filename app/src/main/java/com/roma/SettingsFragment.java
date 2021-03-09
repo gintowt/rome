@@ -30,7 +30,6 @@ public class SettingsFragment extends Fragment {
     Button profile, password, delete, logOut, notification;
     ImageView avatar;
     DatabaseReference avatarsDbRef;
-    String imgUrl;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -57,19 +56,9 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot avatarDetail : snapshot.getChildren()){
-                    String name = avatarDetail.child("name").getValue(String.class);
-                    if(name == "newbie"){
-                        imgUrl = "@drawable/newbie";
-                    }
-                    if(name == "artist") {
-                        imgUrl = "@drawable/artist";
-                    }
-                    if(name == "foodie") {
-                        imgUrl = "@drawable/foodie";
-                    }
-                    if(name == "veteran") {
-                        imgUrl = "@drawable/veteran";
-                    }
+                    String imgUrl = avatarDetail.getValue(String.class);
+                    AvatarModel aModel = new AvatarModel(imgUrl);
+                    Picasso.get().load(aModel.getImgUrl()).into(avatar);
                 }
             }
 
@@ -78,7 +67,7 @@ public class SettingsFragment extends Fragment {
 
             }
         });
-       // Picasso.get().load("@drawable/veteran").resize(100, 100).into(avatar);
+
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

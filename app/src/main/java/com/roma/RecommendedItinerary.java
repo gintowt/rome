@@ -35,10 +35,12 @@ public class RecommendedItinerary extends AppCompatActivity {
    // DatabaseReference tripDetails;
    // DatabaseReference tripDateDb;
     ListView myListView;
+    //List<RecommendedModel> recommendedAttraction;
     List<RecommendedModel> recommendedAttraction;
    // List<TripDetails> tripDetailsList;
     ImageButton back;
     Button save;
+    String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +63,16 @@ public class RecommendedItinerary extends AppCompatActivity {
                     //String key = attractionListDatasnap.getKey();
                    // RecommendedModel keyDetails = new RecommendedModel(key);
                     //newAttraction.add(keyDetails);
+                   // RecommendedModel attractionList = attractionListDatasnap.getValue(RecommendedModel.class);
                     RecommendedModel attractionList = attractionListDatasnap.getValue(RecommendedModel.class);
                     recommendedAttraction.add(attractionList);
                     System.out.println("recommended: " +recommendedAttraction);
+                    image = attractionList.getImgUrl();
                     // System.out.println("newAttraction: " +newAttraction);
 
                 }
 
+                //RecommendedAdapter adapter = new RecommendedAdapter(RecommendedItinerary.this, recommendedAttraction);
                 RecommendedAdapter adapter = new RecommendedAdapter(RecommendedItinerary.this, recommendedAttraction);
                 myListView.setAdapter(adapter);
 
@@ -113,23 +118,7 @@ public class RecommendedItinerary extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                       /* tripDateDb.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                for (DataSnapshot tripSnapshot : snapshot.getChildren()) {
-                                                    //TripDetails trip_date = tripSnapshot.getValue(TripDetails.class);
-                                                    String date_value = tripSnapshot.getValue(String.class);
-                                                    TripDetails tDetails = new TripDetails(date_value);
-                                                    FirebaseDatabase.getInstance().getReference("SavedTrip").child(trip_name).child("date").setValue(tDetails.getDate());
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-
-                                            }
-                                        });
-                                        */
+                                        FirebaseDatabase.getInstance().getReference("SavedTrip").child(trip_name).child("imgUrl").setValue(image);
                                         Toast.makeText(RecommendedItinerary.this, "Saved.", Toast.LENGTH_LONG).show();
                                     } else {
                                         Toast.makeText(RecommendedItinerary.this, "Failed to save. Try again!", Toast.LENGTH_LONG).show();

@@ -36,7 +36,7 @@ public class SavedActivity extends AppCompatActivity {
     DatabaseReference tripDetails;
     //DatabaseReference tripDateDb;
     ListView myListView;
-    List<AttractionLocation> newAttraction;
+    List<TripDetails> newAttraction;
     List<TripDetails> tripDetailsList;
     ImageButton back;
     Button delete;
@@ -51,46 +51,24 @@ public class SavedActivity extends AppCompatActivity {
         newAttraction = new ArrayList<>();
         tripDetailsList = new ArrayList<>();
         tripDetails = FirebaseDatabase.getInstance().getReference("TripName");
-        attractionDbRef = FirebaseDatabase.getInstance().getReference("SelectedAttractions");
-        listDbRef = FirebaseDatabase.getInstance().getReference("AttractionsData");
+        //attractionDbRef = FirebaseDatabase.getInstance().getReference("SelectedAttractions");
+        attractionDbRef = FirebaseDatabase.getInstance().getReference("SavedTrip");
+        //listDbRef = FirebaseDatabase.getInstance().getReference("AttractionsData");
         //tripDateDb = FirebaseDatabase.getInstance().getReference("Date");
-        attractionDbRef.orderByChild("location_distance").addValueEventListener(new ValueEventListener() {
+        attractionDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 newAttraction.clear();
                 for (DataSnapshot attractionDatasnap : snapshot.getChildren()) {
 
-                    AttractionLocation attraction = attractionDatasnap.getValue(AttractionLocation.class);
+                    TripDetails attraction = attractionDatasnap.getValue(TripDetails.class);
                     //System.out.println("name: " +attraction.getAttraction_name() +"avg_time: " +attraction.getAvg_time() );
-                    //newAttraction.add(attraction);
+                    newAttraction.add(attraction);
                     //System.out.println("New array: " +newAttraction);
 
-                    listDbRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot attractionListDatasnap : snapshot.getChildren()) {
-                                AttractionLocation attractionList = attractionListDatasnap.getValue(AttractionLocation.class);
-                                if(attractionList.getAttraction_name().equals(attraction.getAttraction_name())){
-                                    System.out.println("Attraction: " +attraction.getAttraction_name() +"  " +String.valueOf(attraction.getLocation_distance())
-                                            +"   AttractionList: " +attractionList.getAttraction_name() +" " +String.valueOf(attractionList.getAvg_time()));
-                                    newAttraction.add(attractionList);
-                                    System.out.println("KURWAAA: " +newAttraction);
-                                    // System.out.println("newAttraction: " +newAttraction);
-                                }
-                            }
-
-                            ItineraryAdapter adapter = new ItineraryAdapter(SavedActivity.this, newAttraction);
-                            myListView.setAdapter(adapter);
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {}
-
-                    });
-
                 }
-
+                SavedAdapter adapter = new SavedAdapter(SavedActivity.this, newAttraction);
+                myListView.setAdapter(adapter);
 
             }
 

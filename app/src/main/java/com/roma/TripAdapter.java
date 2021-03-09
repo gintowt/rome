@@ -3,6 +3,7 @@ package com.roma;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class TripAdapter extends ArrayAdapter {
         if(!String.valueOf(tripDetails.getDate()).isEmpty()) {
             viewHolder.date.setText(tripDetails.getDate());
         }
-        Picasso.get().load(tripDetails.getImgUrl()).into(viewHolder.image);
+        //Picasso.get().load(tripDetails.getImgUrl()).into(viewHolder.image);
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

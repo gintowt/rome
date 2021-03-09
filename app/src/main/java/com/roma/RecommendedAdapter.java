@@ -36,11 +36,7 @@ public class RecommendedAdapter extends ArrayAdapter {
             LayoutInflater inflater = mContext.getLayoutInflater();
             //ListView listItemView = (ListView) inflater.inflate(R.layout.list_item, null, true);
             convertView = inflater.inflate(R.layout.list_item, parent, false);
-        } /*else {
-               viewHolder = (ViewHolder) convertView.getTag();
-               //holder.title.setText(String.valueOf(getItem(position)));
-             }
-             */
+        }
         viewHolder = new RecommendedHolder();
         RecommendedModel recommendedModel = recommendedList.get(position);
         //TextView title = listItemView.findViewById(R.id.attr_title);
@@ -61,7 +57,7 @@ public class RecommendedAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(mContext, "Button number " +position +" was clicked!!", Toast.LENGTH_SHORT).show();
-                Intent plan = new Intent(mContext, FinalRoute.class);
+                Intent plan = new Intent(mContext, RecommendedRoute.class);
                 System.out.println("POSITION::::" + position);
                 plan.putExtra("position_recommended", position);
                 mContext.startActivity(plan);

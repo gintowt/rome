@@ -36,6 +36,7 @@ public class ItineraryActivity extends AppCompatActivity {
     List<TripDetails> tripDetailsList;
     ImageButton back;
     Button next, save;
+    String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class ItineraryActivity extends AppCompatActivity {
                                 if(attractionList.getAttraction_name().equals(attraction.getAttraction_name())){
                                     System.out.println("Attraction: " +attraction.getAttraction_name() +"  " +String.valueOf(attraction.getLocation_distance())
                                             +"   AttractionList: " +attractionList.getAttraction_name() +" " +String.valueOf(attractionList.getAvg_time()));
+                                    image = attractionList.getImgUrl();
                                     newAttraction.add(attractionList);
                                     System.out.println("KURWAAA: " +newAttraction);
                                    // System.out.println("newAttraction: " +newAttraction);
@@ -149,6 +151,7 @@ public class ItineraryActivity extends AppCompatActivity {
                                                     String date_value = tripSnapshot.getValue(String.class);
                                                     TripDetails tDetails = new TripDetails(date_value);
                                                     FirebaseDatabase.getInstance().getReference("SavedTrip").child(trip_name).child("date").setValue(tDetails.getDate());
+                                                    FirebaseDatabase.getInstance().getReference("SavedTrip").child(trip_name).child("imgUrl").setValue(image);
                                                 }
                                             }
 

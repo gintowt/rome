@@ -76,6 +76,7 @@ public class Avatars extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference("Avatar").child("name").setValue("newbie");
+                FirebaseDatabase.getInstance().getReference("Avatar").child("imgUrl").setValue("https://firebasestorage.googleapis.com/v0/b/roma-d1326.appspot.com/o/avatars%2Fnewbie.png?alt=media&token=231ad48c-f2c7-4533-b720-4c3a957db15b");
                 Intent home = new Intent(Avatars.this, MainScreen.class);
                 startActivity(home);
             }
@@ -85,6 +86,7 @@ public class Avatars extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference("Avatar").child("name").setValue("artist");
+                FirebaseDatabase.getInstance().getReference("Avatar").child("imgUrl").setValue("https://firebasestorage.googleapis.com/v0/b/roma-d1326.appspot.com/o/avatars%2Fartist.png?alt=media&token=fdfe264f-f7e3-4783-85bf-e21d38bd90c5");
                 Intent home = new Intent(Avatars.this, MainScreen.class);
                 startActivity(home);
             }
@@ -94,6 +96,7 @@ public class Avatars extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference("Avatar").child("name").setValue("foodie");
+                FirebaseDatabase.getInstance().getReference("Avatar").child("imgUrl").setValue("https://firebasestorage.googleapis.com/v0/b/roma-d1326.appspot.com/o/avatars%2Ffoodie.png?alt=media&token=dc9b5284-9d82-42a4-b602-bc5697b0422e");
                 Intent home = new Intent(Avatars.this, MainScreen.class);
                 startActivity(home);
             }
@@ -103,6 +106,7 @@ public class Avatars extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference("Avatar").child("name").setValue("veteran");
+                FirebaseDatabase.getInstance().getReference("Avatar").child("imgUrl").setValue("https://firebasestorage.googleapis.com/v0/b/roma-d1326.appspot.com/o/avatars%2Fveteran.png?alt=media&token=f47df1b3-19b8-43fd-95a4-a49167c3f357");
                 Intent home = new Intent(Avatars.this, MainScreen.class);
                 startActivity(home);
             }
