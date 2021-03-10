@@ -49,6 +49,7 @@ public class TripAdapter extends ArrayAdapter {
         viewHolder.view = convertView.findViewById(R.id.view3);
         viewHolder.image = convertView.findViewById(R.id.imageView);
         viewHolder.trip_name.setText(tripDetails.getName());
+        String title = tripDetails.getName();
         if(!String.valueOf(tripDetails.getDate()).isEmpty()) {
             viewHolder.date.setText(tripDetails.getDate());
         }
@@ -59,7 +60,7 @@ public class TripAdapter extends ArrayAdapter {
                 //Toast.makeText(mContext, "Button number " +position +" was clicked!!", Toast.LENGTH_SHORT).show();
                 Intent plan = new Intent(mContext, SavedActivity.class);
                 System.out.println("POSITION::::"+position);
-                plan.putExtra("position_saved", position);
+                plan.putExtra("title", title);
                 mContext.startActivity(plan);
             }
         });

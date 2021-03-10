@@ -20,9 +20,9 @@ import java.util.List;
 public class SavedAdapter extends ArrayAdapter {
 
     private Activity mContext;
-    List<TripDetails> savedList;
+    List<SavedModel> savedList;
 
-    public SavedAdapter(Activity mContext, List<TripDetails> savedList) {
+    public SavedAdapter(Activity mContext, List<SavedModel> savedList) {
         super(mContext, R.layout.list_item, savedList);
         this.mContext = mContext;
         this.savedList = savedList;
@@ -37,7 +37,7 @@ public class SavedAdapter extends ArrayAdapter {
             convertView = inflater.inflate(R.layout.list_item, parent, false);
         }
         viewHolder = new SavedHolder();
-        TripDetails attractionLocation = savedList.get(position);
+        SavedModel attractionLocation = savedList.get(position);
         viewHolder.title = convertView.findViewById(R.id.attr_title);
         viewHolder.avg_time = convertView.findViewById(R.id.attr_distance);
         viewHolder.navigate = convertView.findViewById(R.id.navigate);

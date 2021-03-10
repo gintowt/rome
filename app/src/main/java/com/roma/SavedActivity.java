@@ -36,7 +36,7 @@ public class SavedActivity extends AppCompatActivity {
     DatabaseReference tripDetails;
     //DatabaseReference tripDateDb;
     ListView myListView;
-    List<TripDetails> newAttraction;
+    List<SavedModel> newAttraction;
     List<TripDetails> tripDetailsList;
     ImageButton back;
     Button delete;
@@ -44,7 +44,7 @@ public class SavedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved);
-
+        String title = getIntent().getStringExtra("title");
         myListView = findViewById(R.id.savedListView);
         back = findViewById(R.id.imageButton);
         delete = findViewById(R.id.delete);
@@ -52,18 +52,24 @@ public class SavedActivity extends AppCompatActivity {
         tripDetailsList = new ArrayList<>();
         tripDetails = FirebaseDatabase.getInstance().getReference("TripName");
         //attractionDbRef = FirebaseDatabase.getInstance().getReference("SelectedAttractions");
-        attractionDbRef = FirebaseDatabase.getInstance().getReference("SavedTrip");
+        attractionDbRef = FirebaseDatabase.getInstance().getReference("SavedTrip").child(title);
         //listDbRef = FirebaseDatabase.getInstance().getReference("AttractionsData");
         //tripDateDb = FirebaseDatabase.getInstance().getReference("Date");
         attractionDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 newAttraction.clear();
-                for (DataSnapshot attractionDatasnap : snapshot.getChildren()) {
+                for (DataSnapshot saved : snapshot.getChildren()) {
 
-                    TripDetails attraction = attractionDatasnap.getValue(TripDetails.class);
+                    //SavedModel attraction = attractionDatasnap.getValue(SavedModel.class);
+                    String attraction_name = saved.child("attraction_name").getValue(String.class);
+                    String img_url = saved.child("imgUrl").getValue(String.class);
+                    Integer avg_time = saved.child("avg_time").getValue(Integer.class);
                     //System.out.println("name: " +attraction.getAttraction_name() +"avg_time: " +attraction.getAvg_time() );
-                    newAttraction.add(attraction);
+                    if (attraction_name != null && img_url != null && avg_time != null){
+                        SavedModel attraction = new SavedModel(img_url, attraction_name, avg_time);
+                        newAttraction.add(attraction);
+                    }
                     //System.out.println("New array: " +newAttraction);
 
                 }
