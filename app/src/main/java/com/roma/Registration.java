@@ -60,10 +60,14 @@ public class Registration extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent = new Intent(Registration.this, Avatars.class);
-                Toast.makeText(Registration.this, "Registration completed", Toast.LENGTH_SHORT).show();
+                String email = editTextEmail.getText().toString().trim();
+                String password = editTextPassword.getText().toString().trim();
+
                 registerUser();
-                startActivity(mainIntent);
+                if(!email.isEmpty() && !password.isEmpty()){
+                    Intent mainIntent = new Intent(Registration.this, Avatars.class);
+                    startActivity(mainIntent);
+                }
             }
         });
 
@@ -75,6 +79,7 @@ public class Registration extends AppCompatActivity {
             }
         });
 
+        /*
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +106,8 @@ public class Registration extends AppCompatActivity {
 
             }
         });
+
+         */
 
         google.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +152,8 @@ public class Registration extends AppCompatActivity {
             return;
         }
 
-        if(password.length() < 6){
+        int n = password.length();
+        if(n < 6){
             editTextPassword.setError("Min password length should be 6 characters.");
             editTextPassword.requestFocus();
             return;
