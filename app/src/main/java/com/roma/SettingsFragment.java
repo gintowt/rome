@@ -3,6 +3,8 @@ package com.roma;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 
@@ -30,6 +34,7 @@ public class SettingsFragment extends Fragment {
     Button profile, password, delete, logOut, notification;
     ImageView avatar;
     DatabaseReference avatarsDbRef;
+    FirebaseStorage storage;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -58,7 +63,11 @@ public class SettingsFragment extends Fragment {
                 for (DataSnapshot avatarDetail : snapshot.getChildren()){
                     String imgUrl = avatarDetail.getValue(String.class);
                     AvatarModel aModel = new AvatarModel(imgUrl);
-                    Picasso.get().load(aModel.getImgUrl()).into(avatar);
+                    String img = aModel.getImgUrl();
+                    //Bitmap bmImg = BitmapFactory.decodeFile(img);
+                    //avatar.setImageBitmap(bmImg);
+                    storage = FirebaseStorage.getInstance(img);
+                    Picasso.get().load(String.valueOf(storage)).into(avatar);
                 }
             }
 
