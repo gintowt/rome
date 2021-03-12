@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.6.0'
     implementation 'com.google.firebase:firebase-auth:20.0.2'
     implementation 'com.firebaseui:firebase-ui-database:6.2.1'
+    implementation 'com.firebaseui:firebase-ui-storage:6.4.0'
     //facebook
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
     //google services
