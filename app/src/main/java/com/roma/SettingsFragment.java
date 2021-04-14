@@ -34,7 +34,7 @@ public class SettingsFragment extends Fragment {
     Button profile, password, delete, logOut, notification;
     ImageView avatar;
     DatabaseReference avatarsDbRef;
-    FirebaseStorage storage;
+    //FirebaseStorage storage;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -64,10 +64,7 @@ public class SettingsFragment extends Fragment {
                     String imgUrl = avatarDetail.getValue(String.class);
                     AvatarModel aModel = new AvatarModel(imgUrl);
                     String img = aModel.getImgUrl();
-                    //Bitmap bmImg = BitmapFactory.decodeFile(img);
-                    //avatar.setImageBitmap(bmImg);
-                    storage = FirebaseStorage.getInstance(img);
-                    Picasso.get().load(String.valueOf(storage)).into(avatar);
+                    Picasso.get().load(String.valueOf(img)).into(avatar);
                 }
             }
 

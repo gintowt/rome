@@ -16,7 +16,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_green"
         android:text="Log out"
-        app:backgroundTint="@android:color/transparent"
+        app:backgroundTint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notification" />
 
@@ -29,7 +29,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_green"
         android:text="Delete account"
-        app:backgroundTint="@android:color/transparent"
+        app:backgroundTint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logOut" />
 
@@ -42,7 +42,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_green"
         android:text="Notifications"
-        app:backgroundTint="@android:color/transparent"
+        app:backgroundTint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -55,7 +55,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_green"
         android:text="@string/Password"
-        app:backgroundTint="@android:color/transparent"
+        app:backgroundTint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile" />
 
@@ -107,7 +107,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_green"
         android:text="Profil"
-        app:backgroundTint="@android:color/transparent"
+        app:backgroundTint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatar" />
 

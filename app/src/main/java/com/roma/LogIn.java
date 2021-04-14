@@ -42,18 +42,15 @@ public class LogIn extends AppCompatActivity {
         register = (Button) findViewById(R.id.create);
         facebook = (ImageButton) findViewById(R.id.facebook);
         google = (ImageButton) findViewById(R.id.google);
+        mAuth = FirebaseAuth.getInstance();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = usernameEditText.getText().toString().trim();
-                String password = passwordEditText.getText().toString().trim();
+                //String email = usernameEditText.getText().toString().trim();
+                //String password = passwordEditText.getText().toString().trim();
+                loginUser();
 
-                if(!email.isEmpty() && !password.isEmpty()) {
-                    loginUser();
-                    Intent mainIntent = new Intent(LogIn.this, MainScreen.class);
-                    startActivity(mainIntent);
-                }
             }
         });
 
@@ -79,7 +76,7 @@ public class LogIn extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // FirebaseDatabase.getInstance().getReference("SavedTrip").setValue(tripDetailsList);
-                        EditText editText = customLayout.findViewById(R.id.trip_name);
+                        EditText editText = customLayout.findViewById(R.id.new_password);
                         String trip_name = editText.getText().toString().trim();
                         if (!trip_name.isEmpty()) {
                             //FirebaseDatabase.getInstance().getReference("TripDetails").child("name").setValue(trip_name);
@@ -108,46 +105,30 @@ public class LogIn extends AppCompatActivity {
         String email = usernameEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        if(email.isEmpty())
-        {
-            usernameEditText.setError("Email is required.");
-            usernameEditText.requestFocus();
-            return;
-        }
-
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            usernameEditText.setError("Please provide valid email!");
-            usernameEditText.requestFocus();
-            return;
-        }
-
-        if(password.isEmpty())
-        {
-            passwordEditText.setError("Password is required.");
-            passwordEditText.requestFocus();
-            return;
-        }
-
-        if(passwordEditText.length() < 6){
-            passwordEditText.setError("Min password length should be 6 characters.");
-            passwordEditText.requestFocus();
-            return;
-        }
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(LogIn.this, "Log in successfully!", Toast.LENGTH_LONG).show();
-                    }
-
-                })
-
-                .addOnFailureListener(new OnFailureListener() {
+        if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            if (!password.isEmpty()){
+                mAuth.signInWithEmailAndPassword(email , password)
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                Toast.makeText(LogIn.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LogIn.this , MainScreen.class));
+                                finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(LogIn.this, ""+e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(LogIn.this, "Login Failed !!", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }else{
+                passwordEditText.setError("Empty Fields Are not Allowed");
+            }
+        }else if(email.isEmpty()){
+            usernameEditText.setError("Empty Fields Are not Allowed");
+        }else{
+            usernameEditText.setError("Pleas Enter Correct Email");
+        }
     }
+
 }

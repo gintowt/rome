@@ -45,9 +45,9 @@ public class Avatars extends AppCompatActivity {
         foodie = findViewById(R.id.foodie);
         veteran = findViewById(R.id.veteran);
 
-        select_newbie = findViewById(R.id.select_newbie);
-        select_artist = findViewById(R.id.select_artist);
-        select_foodie = findViewById(R.id.select_foodie);
+        //select_newbie = findViewById(R.id.select_newbie);
+        //select_artist = findViewById(R.id.select_artist);
+        //select_foodie = findViewById(R.id.select_foodie);
         select_veteran = findViewById(R.id.select_veteran);
 
         newbie.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +72,7 @@ public class Avatars extends AppCompatActivity {
             }
         });
 
+        /*
         select_newbie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,11 +103,12 @@ public class Avatars extends AppCompatActivity {
             }
         });
 
+         */
         select_veteran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference("Avatar").child("name").setValue("veteran");
-                FirebaseDatabase.getInstance().getReference("Avatar").child("imgUrl").setValue("https://firebasestorage.googleapis.com/v0/b/roma-d1326.appspot.com/o/avatars%2Fveteran.png?alt=media&token=f47df1b3-19b8-43fd-95a4-a49167c3f357");
+                FirebaseDatabase.getInstance().getReference("Avatar").child("imgUrl").setValue("@+id/avatar");
                 Intent home = new Intent(Avatars.this, MainScreen.class);
                 startActivity(home);
             }

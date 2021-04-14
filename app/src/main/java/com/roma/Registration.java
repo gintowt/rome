@@ -24,6 +24,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,10 +65,6 @@ public class Registration extends AppCompatActivity {
                 String password = editTextPassword.getText().toString().trim();
 
                 registerUser();
-                if(!email.isEmpty() && !password.isEmpty()){
-                    Intent mainIntent = new Intent(Registration.this, Avatars.class);
-                    startActivity(mainIntent);
-                }
             }
         });
 
@@ -132,61 +129,35 @@ public class Registration extends AppCompatActivity {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        if(email.isEmpty())
-        {
-            editTextEmail.setError("Email is required.");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            editTextEmail.setError("Please provide valid email!");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if(password.isEmpty())
-        {
-            editTextPassword.setError("Password is required.");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        int n = password.length();
-        if(n < 6){
-            editTextPassword.setError("Min password length should be 6 characters.");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            if (!password.isEmpty()){
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                Toast.makeText(Registration.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
+                                Intent mainIntent = new Intent(Registration.this, Avatars.class);
+                                startActivity(mainIntent);
+                                finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            User user = new User(email);
-
-                            FirebaseDatabase.getInstance().getReference("Users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-                                        Toast.makeText(Registration.this, "User has been registered successfully.", Toast.LENGTH_LONG).show();
-                                    }
-                                    else{
-                                        Toast.makeText(Registration.this, "Failed to register. Try again!", Toast.LENGTH_LONG).show();
-                                    }
-
-                                }
-                            });
-                        }
-                        else{
-                            Toast.makeText(Registration.this, "Failed to register. Try again!", Toast.LENGTH_LONG).show();
-                        }
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Registration.this, "Registration Error !!", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }else{
+                editTextPassword.setError("Empty Fields Are not Allowed");
+            }
+        }else if(email.isEmpty()){
+            editTextEmail.setError("Empty Fields Are not Allowed");
+        }else{
+            editTextEmail.setError("Pleas Enter Correct Email");
+        }
     }
+
+
+
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
